@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nico - Your Trusted Investment Partner</title>
+    
+    <!-- Bootstrap CSS (Used for grid only, nav is custom) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+      /* ==========================================
+         NICO INVESTMENT PLATFORM - BINANCE THEME
+         ========================================== */
+
+        :root {
+            /* Binance-like Colors */
+            --primary-yellow: #F0B90B; /* The signature Binance Yellow */
+            --yellow-hover: #FCD535;
+            --dark-bg: #0B0E11;        /* Deep almost-black */
+            --darker-bg: #181A20;      /* Slightly lighter for cards/sections */
+            --card-bg: #1E2329;        /* Exchange card color */
+            --text-primary: #EAECEF;   /* Bright white/grey */
+            --text-secondary: #848E9C; /* Muted grey */
+            --border-color: #2B3139;
+            --success: #0ECB81;        /* Crypto green */
+            --danger: #F6465D;         /* Crypto red */
+            --transition: all 0.3s ease;
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            /* Reduced base font size per request */
+            font-size: 0.9375rem; /* ~15px */
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        /* ==========================================
+           CUSTOM NAVIGATION (No Bootstrap Nav)
+           ========================================== */
+        .custom-nav {
+            background-color: rgba(11, 14, 17, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.8rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-yellow);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-logo span {
+            color: var(--text-primary);
+        }
+
+        /* Desktop Menu */
+        .desktop-menu {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-yellow);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Mobile Trigger */
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* Sidebar / Drawer for Mobile */
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px; /* Hidden by default */
+            width: 280px;
+            height: 100vh;
+            background-color: var(--darker-bg);
+            border-left: 1px solid var(--border-color);
+            padding: 2rem;
+            z-index: 1001;
+            transition: right 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .close-sidebar {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-sidebar:hover {
+            color: var(--primary-yellow);
+        }
+
+        .sidebar-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-link {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .sidebar-link:hover {
+            color: var(--primary-yellow);
+            padding-left: 5px;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(2px);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ==========================================
+           BUTTONS (Binance Style)
+           ========================================== */
+        .btn-primary-custom {
+            background-color: var(--primary-yellow);
+            color: #000000; /* Black text on yellow is key for Binance theme */
+            font-weight: 600;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 4px; /* Slightly sharper corners */
+            transition: var(--transition);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: var(--yellow-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--border-color); /* Subtle border */
+            color: var(--text-primary);
+            background: transparent;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .btn-outline-custom:hover {
+            color: var(--primary-yellow);
+            border-color: var(--primary-yellow);
+        }
+
+        /* ==========================================
+           HERO SECTION
+           ========================================== */
+        .hero-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            overflow: hidden;
+            /* Gradient Fallback if video fails */
+            background: radial-gradient(circle at 10% 20%, rgba(240, 185, 11, 0.05) 0%, rgba(11, 14, 17, 1) 50%);
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            opacity: 0.4; /* Dimmed for readability */
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(11, 14, 17, 0.9), rgba(11, 14, 17, 0.8));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3rem; 
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title .static-text {
+            color: var(--text-primary);
+        }
+
+        .hero-title .dynamic-text {
+            color: var(--primary-yellow);
+            display: inline-block;
+            min-width: 300px;
+            animation: fadeInOut 1s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(20px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* ==========================================
+           FEATURES SECTION
+           ========================================== */
+        .features-section {
+            padding: 100px 0;
+            background: var(--dark-bg);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary-yellow);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px; /* Sharper edges */
+            padding: 2rem;
+            transition: var(--transition);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-yellow);
+            box-shadow: 0 10px 30px rgba(240, 185, 11, 0.1);
+        }
+
+        .feature-icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(240, 185, 11, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            color: var(--primary-yellow);
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           INVESTMENT OPPORTUNITIES
+           ========================================== */
+        .opportunities-section {
+            padding: 100px 0;
+            background: var(--darker-bg);
+        }
+
+        .opportunity-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .opportunity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--border-color);
+        }
+
+        .opportunity-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            position: relative;
+        }
+
+        .opportunity-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-yellow);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .opportunity-content {
+            padding: 1.5rem;
+        }
+
+        .opportunity-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .opportunity-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================
+           CHARTS SECTION
+           ========================================== */
+        .charts-section {
+            padding: 100px 0;
+            background: var(--dark-bg);
+        }
+
+        .chart-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .chart-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .chart-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .chart-wrapper {
+            width: 100%;
+            height: 450px;
+            background: var(--darker-bg);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        /* ==========================================
+           TESTIMONIALS SECTION
+           ========================================== */
+        .testimonials-section {
+            padding: 100px 0;
+            background: var(--darker-bg);
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 4rem;
+            color: var(--primary-yellow);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-yellow);
+            margin: 0 auto 1rem;
+            object-fit: cover;
+        }
+
+        .testimonial-author-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-yellow);
+            margin-bottom: 0.3rem;
+        }
+
+        .testimonial-author-title {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 2rem;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .testimonial-dot.active {
+            background: var(--primary-yellow);
+            transform: scale(1.2);
+        }
+
+        .testimonial-arrow {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .testimonial-arrow:hover {
+            background: var(--primary-yellow);
+            color: #000;
+            border-color: var(--primary-yellow);
+        }
+
+        /* ==========================================
+           ABOUT SECTION
+           ========================================== */
+        .about-section {
+            padding: 100px 0;
+            background: var(--dark-bg);
+        }
+
+        .mission-text {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary-yellow);
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            color: var(--primary-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .values-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .value-item {
+            text-align: center;
+        }
+
+        .value-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .value-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* ==========================================
+           FOOTER
+           ========================================== */
+        .footer {
+            background: var(--dark-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h5 {
+            color: var(--primary-yellow);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-yellow);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--primary-yellow);
+            color: var(--dark-bg);
+            border-color: var(--primary-yellow);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            color: var(--text-secondary);
+        }
+
+        .footer-tagline {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* ==========================================
+           RESPONSIVE
+           ========================================== */
+        @media (max-width: 991px) {
+            .desktop-menu { display: none; }
+            .mobile-toggle { display: block; }
+            .hero-title { font-size: 2.5rem; }
+            .hero-content { text-align: center; }
+            .hero-buttons { justify-content: center; }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title { font-size: 2rem; }
+            .feature-card, .opportunity-content, .testimonial-card, .stat-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay for mobile menu -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="custom-nav">
+        <a href="#" class="nav-logo">
+            <span style="font-size:1.5rem;">📈</span> 
+            <span>Nico</span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="desktop-menu">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#investments" class="nav-link">Investments</a>
+            <a href="#charts" class="nav-link">Live Charts</a>
+            <a href="#testimonials" class="nav-link">Testimonials</a>
+            <a href="#about" class="nav-link">About Us</a>
+            <div class="nav-actions">
+                <button class="btn btn-outline-custom">Sign In</button>
+                <button class="btn btn-primary-custom">Join Us</button>
+            </div>
+        </div>
+
+        <!-- Mobile Toggle -->
+        <div class="mobile-toggle" id="mobileToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Sidebar Drawer -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="sidebar-header">
+            <div class="nav-logo">Nico</div>
+            <div class="close-sidebar" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="sidebar-links">
+            <a href="#features" class="sidebar-link">Features</a>
+            <a href="#investments" class="sidebar-link">Investments</a>
+            <a href="#charts" class="sidebar-link">Live Charts</a>
+            <a href="#testimonials" class="sidebar-link">Testimonials</a>
+            <a href="#about" class="sidebar-link">About Us</a>
+            <hr style="border-color: var(--border-color);">
+            <a href="#" class="sidebar-link">Sign In</a>
+            <a href="#" class="btn btn-primary-custom" style="text-align:center;">Join Us</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="video-background">
+            <video autoplay muted loop playsinline>
+                <source src="assets/image/hero.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 hero-content">
+                    <h1 class="hero-title">
+                        <span class="static-text">Nico – Your Trusted</span><br>
+                        <span class="dynamic-text" id="dynamicText">Investment Partner</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Harness the power of data-driven insights and secure technologies to grow your portfolio confidently. Join thousands of satisfied investors who trust Nico for their financial success.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary-custom">Get Started</button>
+                        <button class="btn btn-outline-custom">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22proName%22%3A%22FOREXCOM%3AEURUSD%22%2C%22title%22%3A%22EUR%2FUSD%22%7D%2C%7B%22proName%22%3A%22FOREXCOM%3AGBPUSD%22%2C%22title%22%3A%22GBP%2FUSD%22%7D%2C%7B%22proName%22%3A%22FOREXCOM%3AUSDJPY%22%2C%22title%22%3A%22USD%2FJPY%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22title%22%3A%22BTC%2FUSD%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3AETHUSD%22%2C%22title%22%3A%22ETH%2FUSD%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3ATSLA%22%2C%22title%22%3A%22Tesla%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AAAPL%22%2C%22title%22%3A%22Apple%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AAMZN%22%2C%22title%22%3A%22Amazon%22%7D%5D%2C%22showSymbolLogo%22%3Atrue%2C%22colorTheme%22%3A%22dark%22%2C%22isTransparent%22%3Atrue%2C%22displayMode%22%3A%22adaptive%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A44%2C%22utm_source%22%3A%22willz-max.github.io%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22ticker-tape%22%2C%22page-uri%22%3A%22willz-max.github.io%2Finteractive%2F%22%7D" title="ticker tape TradingView widget" lang="en" style="user-select: none; box-sizing: border-box; display: block; height: 44px; width: 100%;"></iframe>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <p class="section-subtitle">Everything you need to manage your investments with confidence and ease</p>
+            
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3 class="feature-title">Real-Time Analytics</h3>
+                        <p class="feature-description">Access instantaneous market data and performance metrics to make informed decisions without delay.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3 class="feature-title">Secure Portfolio</h3>
+                        <p class="feature-description">Our state-of-the-art encryption and security protocols ensure your assets and data remain protected 24/7.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-exchange-alt"></i></div>
+                        <h3 class="feature-title">Instant Transfers</h3>
+                        <p class="feature-description">Execute trades and manage funds quickly with lightning-fast transaction processing capabilities globally.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
+                        <h3 class="feature-title">Personalized Reporting</h3>
+                        <p class="feature-description">Receive detailed, customized reports on your financial performance and strategic projections monthly.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                        <h3 class="feature-title">AI-Powered Insights</h3>
+                        <p class="feature-description">Leverage artificial intelligence to identify market trends and optimize your investment strategy.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h3 class="feature-title">Mobile Trading</h3>
+                        <p class="feature-description">Trade on the go with our fully responsive mobile platform for iOS and Android devices.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 7 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-users"></i></div>
+                        <h3 class="feature-title">Expert Support</h3>
+                        <p class="feature-description">Get 24/7 access to our team of financial experts ready to assist with your investment queries.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 8 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
+                        <h3 class="feature-title">Portfolio Diversification</h3>
+                        <p class="feature-description">Build a balanced portfolio across multiple asset classes to minimize risk and maximize returns.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Opportunities Section -->
+    <section id="investments" class="opportunities-section">
+        <div class="container">
+            <h2 class="section-title">Investment Opportunities</h2>
+            <p class="section-subtitle">Explore our carefully curated investment products designed to maximize your returns</p>
+            
+            <div class="row g-4">
+                <!-- Staking Investment -->
+                <div class="col-lg-6">
+                    <div class="opportunity-card">
+                        <div class="position-relative">
+                            <img src="assets/image/staking-main.jpg" alt="Staking Investment" class="opportunity-image">
+                            <span class="opportunity-badge">Secure Passive Income</span>
+                        </div>
+                        <div class="opportunity-content">
+                            <h3 class="opportunity-title">Staking Investment</h3>
+                            <p class="opportunity-description">
+                                Participate in network validation and earn consistent rewards. We curate the most profitable and secure staking protocols for our clients.
+                            </p>
+                            <button class="btn btn-primary-custom w-100">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forex Trading -->
+                <div class="col-lg-6">
+                    <div class="opportunity-card">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400&fit=crop" alt="Forex Trading" class="opportunity-image">
+                            <span class="opportunity-badge">Global Markets</span>
+                        </div>
+                        <div class="opportunity-content">
+                            <h3 class="opportunity-title">Forex Trading</h3>
+                            <p class="opportunity-description">
+                                Leverage the world's most liquid market with precision execution and competitive spreads. Access tools for both automated and manual trading strategies.
+                            </p>
+                            <button class="btn btn-primary-custom w-100">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4">
+                <!-- Staking Investment -->
+                <div class="col-lg-6">
+                    <div class="opportunity-card">
+                        <div class="position-relative">
+                            <img src="assets/image/stocks.jpg" alt="Staking Investment" class="opportunity-image">
+                            <span class="opportunity-badge">High Dividends</span>
+                        </div>
+                        <div class="opportunity-content">
+                            <h3 class="opportunity-title">Stock</h3>
+                            <p class="opportunity-description">
+                                Professional stock trading services designed to help you invest with confidence. We offer advanced charting tools, fundamental analysis data, and commission-free trading on global markets tailored to your strategy.
+                            </p>
+                            <button class="btn btn-primary-custom w-100">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forex Trading -->
+                <div class="col-lg-6">
+                    <div class="opportunity-card">
+                        <div class="position-relative">
+                            <img src="assets/image/img/woman2.jpg" alt="Forex Trading" class="opportunity-image">
+                            <span class="opportunity-badge">Smart Investment</span>
+                        </div>
+                        <div class="opportunity-content">
+                            <h3 class="opportunity-title">Investment Consulting</h3>
+                            <p class="opportunity-description">
+                                Professional business consulting services designed to help your organization grow and succeed. We offer strategic planning, operational improvements, and innovative solutions tailored to your specific needs...
+                            </p>
+                            <button class="btn btn-primary-custom w-100">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Charts Section -->
+    <section id="charts" class="charts-section">
+        <div class="container">
+            <h2 class="section-title">Live Market Data</h2>
+            <p class="section-subtitle">Real-time analytics and market insights at your fingertips</p>
+            
+            <!-- Market Performance (BTC) -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <div>
+                        <h3 class="chart-title">Market Performance</h3>
+                        <p class="chart-subtitle">Sample market data visualization with real-time updates</p>
+                    </div>
+                    <button class="btn btn-primary-custom trade-btn-sm"><i class="fas fa-bolt me-2"></i>Trade Now</button>
+                </div>
+                
+                <div class="chart-wrapper">
+                    <div class="tradingview-widget-container" style="height:100%;width:100%">
+                        <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                        {
+                            "autosize": true,
+                            "symbol": "BINANCE:BTCUSDT",
+                            "interval": "D",
+                            "timezone": "Etc/UTC",
+                            "theme": "dark",
+                            "style": "1",
+                            "locale": "en",
+                            "enable_publishing": false,
+                            "backgroundColor": "rgba(24, 26, 32, 1)",
+                            "gridColor": "rgba(43, 49, 57, 1)",
+                            "allow_symbol_change": true,
+                            "calendar": false,
+                            "support_host": "https://www.tradingview.com"
+                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forex Market -->
+            <div class="chart-container mt-4">
+                <div class="chart-header">
+                    <div>
+                        <h3 class="chart-title">Forex Market</h3>
+                        <p class="chart-subtitle">Major currency pairs live data</p>
+                    </div>
+                    <button class="btn btn-primary-custom trade-btn-sm"><i class="fas fa-bolt me-2"></i>Trade Now</button>
+                </div>
+                
+                <div class="chart-wrapper">
+                    <div class="tradingview-widget-container" style="height:100%;width:100%">
+                        <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                        {
+                            "autosize": true,
+                            "symbol": "FX:EURUSD",
+                            "interval": "D",
+                            "timezone": "Etc/UTC",
+                            "theme": "dark",
+                            "style": "1",
+                            "locale": "en",
+                            "enable_publishing": false,
+                            "backgroundColor": "rgba(24, 26, 32, 1)",
+                            "gridColor": "rgba(43, 49, 57, 1)",
+                            "allow_symbol_change": true,
+                            "calendar": false,
+                            "support_host": "https://www.tradingview.com"
+                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <p class="section-subtitle">Join thousands of satisfied investors who trust Nico with their portfolios</p>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="testimonial-card" id="testimonialCard">
+                        <p class="testimonial-text" id="testimonialText">
+                            "The instant transfer feature saved me crucial time during volatile market shifts. A truly modern financial platform."
+                        </p>
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop" alt="Client" class="testimonial-author-img" id="testimonialImg">
+                        <h4 class="testimonial-author-name" id="testimonialName">Sara Chen</h4>
+                        <p class="testimonial-author-title" id="testimonialTitle">Startup Founder</p>
+                    </div>
+                    
+                    <div class="testimonial-controls">
+                        <button class="testimonial-arrow" onclick="previousTestimonial()">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="testimonial-dot active" onclick="goToTestimonial(0)"></span>
+                        <span class="testimonial-dot" onclick="goToTestimonial(1)"></span>
+                        <span class="testimonial-dot" onclick="goToTestimonial(2)"></span>
+                        <span class="testimonial-dot" onclick="goToTestimonial(3)"></span>
+                        <button class="testimonial-arrow" onclick="nextTestimonial()">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">Our Mission: Clarity, Security, Growth</h2>
+            
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-10">
+                    <p class="mission-text">
+                        At Nico, our mission is simple: to make sophisticated investment accessible to everyone. We believe in clarity—providing straightforward data without unnecessary complexity. Our core values center around absolute security and delivering consistent growth for our clients.
+                    </p>
+                    <p class="mission-text">
+                        Founded in 2018, Nico has quickly become a leader in fintech innovation, managing over $5 billion in assets and servicing thousands of satisfied clients worldwide. We are committed to technological excellence and ethical practices, ensuring you always have a trustworthy partner on your financial journey.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="stat-number">$5B+</div>
+                    <div class="stat-label">Assets Managed</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-globe"></i></div>
+                    <div class="stat-number">120+</div>
+                    <div class="stat-label">Countries</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-award"></i></div>
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Industry Awards</div>
+                </div>
+            </div>
+
+            <!-- Core Values -->
+            <div class="values-container">
+                <div class="value-item">
+                    <h3 class="value-title">Clarity</h3>
+                    <p class="value-description">
+                        We provide straightforward data and insights without unnecessary complexity, empowering you to make informed decisions.
+                    </p>
+                </div>
+
+                <div class="value-item">
+                    <h3 class="value-title">Security</h3>
+                    <p class="value-description">
+                        Your assets and data are protected by state-of-the-art encryption and security protocols, 24/7.
+                    </p>
+                </div>
+
+                <div class="value-item">
+                    <h3 class="value-title">Growth</h3>
+                    <p class="value-description">
+                        We are committed to helping you achieve consistent portfolio growth through innovative tools and strategies.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- About -->
+                <div class="footer-section">
+                    <h5>
+                        <span style="font-size:1.2rem;">📈</span> Nico
+                    </h5>
+                    <p class="footer-description">
+                        Your trusted investment partner for secure and profitable portfolio management.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#charts">Live Charts</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div class="footer-section">
+                    <h5>Legal</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="footer-section">
+                    <h5>Contact Us</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope me-2"></i> info@nicoinvest.com</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> New York, USA</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2025 <strong>Nico Investment Platform</strong>. All rights reserved.
+                </div>
+                <div class="footer-tagline">
+                    Designed with excellence for your financial success
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // === Mobile Sidebar Logic ===
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const overlay = document.getElementById('overlay');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+        function toggleMenu() {
+            mobileSidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = mobileSidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        mobileToggle.addEventListener('click', toggleMenu);
+        closeSidebar.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking a link
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        // === Dynamic Hero Text Animation ===
+        const dynamicTexts = [
+            'Investment Partner',
+            'Financial Advisor',
+            'Wealth Builder',
+            'Trading Platform',
+            'Portfolio Manager'
+        ];
+        
+        let currentTextIndex = 0;
+        const dynamicTextElement = document.getElementById('dynamicText');
+        
+        function changeText() {
+            currentTextIndex = (currentTextIndex + 1) % dynamicTexts.length;
+            dynamicTextElement.style.animation = 'none';
+            setTimeout(() => {
+                dynamicTextElement.textContent = dynamicTexts[currentTextIndex];
+                dynamicTextElement.style.animation = 'fadeInOut 1s ease-in-out';
+            }, 50);
+        }
+        
+        setInterval(changeText, 5000);
+
+        // === Testimonials Logic ===
+        const testimonials = [
+            {
+                text: "The instant transfer feature saved me crucial time during volatile market shifts. A truly modern financial platform.",
+                name: "Sara Chen",
+                title: "Startup Founder",
+                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop"
+            },
+            {
+                text: "Nico's AI-powered insights have consistently helped me make smarter investment decisions. The returns speak for themselves.",
+                name: "Michael Rodriguez",
+                title: "Portfolio Manager",
+                image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop"
+            },
+            {
+                text: "The security features give me peace of mind. I can trade confidently knowing my assets are protected 24/7.",
+                name: "Emily Watson",
+                title: "Real Estate Investor",
+                image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop"
+            },
+            {
+                text: "Best investment platform I've used. The mobile app is seamless and the customer support is outstanding.",
+                name: "David Park",
+                title: "Tech Entrepreneur",
+                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop"
+            }
+        ];
+
+        let currentTestimonialIndex = 0;
+
+        function updateTestimonial(index) {
+            const testimonial = testimonials[index];
+            const tText = document.getElementById('testimonialText');
+            
+            // Simple fade out
+            tText.style.opacity = 0;
+            
+            setTimeout(() => {
+                tText.textContent = testimonial.text;
+                document.getElementById('testimonialName').textContent = testimonial.name;
+                document.getElementById('testimonialTitle').textContent = testimonial.title;
+                document.getElementById('testimonialImg').src = testimonial.image;
+                
+                // Update dots
+                document.querySelectorAll('.testimonial-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                
+                // Fade in
+                tText.style.opacity = 1;
+            }, 300);
+        }
+
+        function nextTestimonial() {
+            currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
+            updateTestimonial(currentTestimonialIndex);
+        }
+
+        function previousTestimonial() {
+            currentTestimonialIndex = (currentTestimonialIndex - 1 + testimonials.length) % testimonials.length;
+            updateTestimonial(currentTestimonialIndex);
+        }
+
+        function goToTestimonial(index) {
+            currentTestimonialIndex = index;
+            updateTestimonial(currentTestimonialIndex);
+        }
+
+        // Auto-rotate testimonials
+        setInterval(nextTestimonial, 7000);
+
+    </script>
+</body>
+</html>
