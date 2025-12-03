@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nico - Your Trusted Investment Partner</title>
     
-    <!-- Bootstrap CSS (Used for grid only, nav is custom) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
@@ -45,7 +42,6 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--dark-bg);
             color: var(--text-primary);
-            /* Reduced base font size per request */
             font-size: 0.9375rem; /* ~15px */
             line-height: 1.6;
             overflow-x: hidden;
@@ -67,7 +63,7 @@
         }
 
         /* ==========================================
-           CUSTOM NAVIGATION (No Bootstrap Nav)
+           CUSTOM NAVIGATION
            ========================================== */
         .custom-nav {
             background-color: rgba(11, 14, 17, 0.95);
@@ -207,15 +203,15 @@
         }
 
         /* ==========================================
-           BUTTONS (Binance Style)
+           BUTTONS
            ========================================== */
         .btn-primary-custom {
             background-color: var(--primary-yellow);
-            color: #000000; /* Black text on yellow is key for Binance theme */
+            color: #000000; 
             font-weight: 600;
             padding: 10px 24px;
             border: none;
-            border-radius: 4px; /* Slightly sharper corners */
+            border-radius: 4px; 
             transition: var(--transition);
             font-size: 0.9rem;
             text-transform: uppercase;
@@ -227,7 +223,7 @@
         }
 
         .btn-outline-custom {
-            border: 1px solid var(--border-color); /* Subtle border */
+            border: 1px solid var(--border-color); 
             color: var(--text-primary);
             background: transparent;
             padding: 10px 24px;
@@ -253,7 +249,6 @@
             align-items: center;
             padding-top: 80px;
             overflow: hidden;
-            /* Gradient Fallback if video fails */
             background: radial-gradient(circle at 10% 20%, rgba(240, 185, 11, 0.05) 0%, rgba(11, 14, 17, 1) 50%);
         }
 
@@ -277,7 +272,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             object-fit: cover;
-            opacity: 0.4; /* Dimmed for readability */
+            opacity: 0.4;
         }
 
         .video-overlay {
@@ -359,7 +354,7 @@
         .feature-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px; /* Sharper edges */
+            border-radius: 8px;
             padding: 2rem;
             transition: var(--transition);
             height: 100%;
@@ -461,47 +456,128 @@
         }
 
         /* ==========================================
-           CHARTS SECTION
+           LIVE TRADING SECTION
            ========================================== */
-        .charts-section {
+        .live-trading-section {
             padding: 100px 0;
             background: var(--dark-bg);
         }
 
-        .chart-container {
+        .live-trading-container {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 1.5rem;
-            margin-bottom: 2rem;
+            position: relative;
         }
 
-        .chart-header {
+        .live-trading-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(246, 70, 93, 0.2);
+            color: var(--danger);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.8rem;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
+            gap: 8px;
+            z-index: 10;
         }
 
-        .chart-title {
-            font-size: 1.4rem;
-            font-weight: 700;
+        .live-trading-badge::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--danger);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 2rem;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
             color: var(--text-primary);
-        }
-
-        .chart-subtitle {
-            color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
-        .chart-wrapper {
-            width: 100%;
-            height: 450px;
-            background: var(--darker-bg);
+        .custom-table th,
+        .custom-table td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .custom-table th {
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .custom-table tbody tr:hover {
+            background-color: var(--darker-bg);
+        }
+
+        .custom-table td {
+            font-weight: 500;
+        }
+
+        .text-success { color: var(--success) !important; }
+        .text-danger { color: var(--danger) !important; }
+
+        .mirrored-badge {
+            display: inline-block;
+            background: rgba(14, 203, 129, 0.2);
+            color: var(--success);
+            padding: 4px 8px;
             border-radius: 4px;
-            overflow: hidden;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        /* LIVE PRICE ANIMATIONS */
+        @keyframes flashGreen {
+            0% { background-color: rgba(14, 203, 129, 0.0); }
+            50% { background-color: rgba(14, 203, 129, 0.2); }
+            100% { background-color: rgba(14, 203, 129, 0.0); }
+        }
+
+        @keyframes flashRed {
+            0% { background-color: rgba(246, 70, 93, 0.0); }
+            50% { background-color: rgba(246, 70, 93, 0.2); }
+            100% { background-color: rgba(246, 70, 93, 0.0); }
+        }
+
+        .price-up { animation: flashGreen 1s ease-out; }
+        .price-down { animation: flashRed 1s ease-out; }
+
+        /* Smooth row reordering */
+        #live-trade-body tr {
+            transition: all 0.5s ease;
+        }
+
+        .loading-row td {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
         }
 
         /* ==========================================
@@ -788,26 +864,324 @@
         @media (max-width: 576px) {
             .hero-title { font-size: 2rem; }
             .feature-card, .opportunity-content, .testimonial-card, .stat-card { padding: 1.5rem; }
+            .custom-table th, .custom-table td { padding: 10px; font-size: 0.8rem; }
+            .mirrored-badge { font-size: 0.65rem; padding: 3px 6px; }
         }
+
+        /* ==========================================
+   PRODUCTS SECTION
+   ========================================== */
+.product-section {
+    padding: 100px 0;
+    background: var(--dark-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.product-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.product-content {
+    position: relative;
+    z-index: 2;
+}
+
+.product-section .section-description {
+    max-width: 700px;
+    margin: 0 auto 80px auto;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.product-feature {
+    margin-bottom: 80px;
+    padding: 40px 0;
+}
+
+.product-feature:last-child {
+    margin-bottom: 0;
+}
+
+.feature-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.product-feature-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-yellow), var(--yellow-hover));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(240, 185, 11, 0.2);
+    transition: var(--transition);
+}
+
+.product-feature-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 40px rgba(240, 185, 11, 0.3);
+}
+
+.product-feature-icon i {
+    font-size: 2rem;
+    color: var(--dark-bg);
+}
+
+.product-feature-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.product-feature-description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.product-feature-box {
+    margin-top: 30px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.product-feature-box:hover {
+    box-shadow: 0 15px 40px rgba(240, 185, 11, 0.1);
+    border-color: var(--primary-yellow);
+    transform: translateY(-5px);
+}
+
+.product-feature-box-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--primary-yellow);
+}
+
+.product-feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.product-feature-list li {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 30px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.product-feature-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-yellow);
+    font-weight: bold;
+    font-size: 1.2rem;
+    top: -2px;
+}
+
+.product-feature-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.product-feature-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+
+.product-feature-image img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 25px 80px rgba(240, 185, 11, 0.2);
+    border-color: var(--primary-yellow);
+}
+
+.product-cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-yellow), var(--yellow-hover));
+    color: var(--dark-bg);
+    padding: 12px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 30px rgba(240, 185, 11, 0.3);
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.product-cta-button:hover {
+    background: linear-gradient(135deg, var(--yellow-hover), var(--primary-yellow));
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(240, 185, 11, 0.4);
+    color: var(--dark-bg);
+}
+
+/* Floating shapes for visual enhancement */
+.product-floating-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.product-floating-shape {
+    position: absolute;
+    background: linear-gradient(135deg, rgba(240, 185, 11, 0.1), rgba(252, 213, 53, 0.1));
+    border-radius: 50%;
+    animation: productFloat 8s ease-in-out infinite;
+}
+
+.product-floating-shape:nth-child(1) {
+    width: 100px;
+    height: 100px;
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.product-floating-shape:nth-child(2) {
+    width: 60px;
+    height: 60px;
+    top: 70%;
+    right: 10%;
+    animation-delay: 3s;
+}
+
+.product-floating-shape:nth-child(3) {
+    width: 80px;
+    height: 80px;
+    top: 40%;
+    right: 5%;
+    animation-delay: 6s;
+}
+
+@keyframes productFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+    }
+    33% { 
+        transform: translateY(-20px) rotate(120deg); 
+    }
+    66% { 
+        transform: translateY(10px) rotate(240deg); 
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .product-section {
+        padding: 80px 0;
+    }
+
+    .product-feature {
+        margin-bottom: 60px;
+        text-align: center;
+    }
+
+    .feature-content {
+        margin-bottom: 40px;
+    }
+
+    .product-feature-title {
+        font-size: 1.6rem;
+    }
+
+    .product-feature-icon {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-feature-title {
+        font-size: 1.4rem;
+    }
+
+    .product-feature-description {
+        font-size: 0.95rem;
+    }
+
+    .product-feature-box {
+        padding: 25px;
+    }
+
+    .product-floating-shape {
+        display: none;
+    }
+
+    .product-feature-image img {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-section {
+        padding: 60px 0;
+    }
+
+    .product-feature {
+        margin-bottom: 50px;
+    }
+
+    .product-feature-title {
+        font-size: 1.3rem;
+    }
+}
     </style>
 </head>
 <body>
 
-    <!-- Overlay for mobile menu -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- Navigation -->
     <nav class="custom-nav">
         <a href="#" class="nav-logo">
             <span style="font-size:1.5rem;">📈</span> 
             <span>Nico</span>
         </a>
 
-        <!-- Desktop Menu -->
         <div class="desktop-menu">
             <a href="#features" class="nav-link">Features</a>
             <a href="#investments" class="nav-link">Investments</a>
-            <a href="#charts" class="nav-link">Live Charts</a>
+            <a href="#live-trading" class="nav-link">Live Trading</a>
             <a href="#testimonials" class="nav-link">Testimonials</a>
             <a href="#about" class="nav-link">About Us</a>
             <div class="nav-actions">
@@ -816,13 +1190,11 @@
             </div>
         </div>
 
-        <!-- Mobile Toggle -->
         <div class="mobile-toggle" id="mobileToggle">
             <i class="fas fa-bars"></i>
         </div>
     </nav>
 
-    <!-- Sidebar Drawer -->
     <div class="mobile-sidebar" id="mobileSidebar">
         <div class="sidebar-header">
             <div class="nav-logo">Nico</div>
@@ -833,7 +1205,7 @@
         <div class="sidebar-links">
             <a href="#features" class="sidebar-link">Features</a>
             <a href="#investments" class="sidebar-link">Investments</a>
-            <a href="#charts" class="sidebar-link">Live Charts</a>
+            <a href="#live-trading" class="sidebar-link">Live Trading</a>
             <a href="#testimonials" class="sidebar-link">Testimonials</a>
             <a href="#about" class="sidebar-link">About Us</a>
             <hr style="border-color: var(--border-color);">
@@ -842,7 +1214,6 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="video-background">
             <video autoplay muted loop playsinline>
@@ -869,16 +1240,15 @@
             </div>
         </div>
     </section>
+    
     <iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22proName%22%3A%22FOREXCOM%3AEURUSD%22%2C%22title%22%3A%22EUR%2FUSD%22%7D%2C%7B%22proName%22%3A%22FOREXCOM%3AGBPUSD%22%2C%22title%22%3A%22GBP%2FUSD%22%7D%2C%7B%22proName%22%3A%22FOREXCOM%3AUSDJPY%22%2C%22title%22%3A%22USD%2FJPY%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22title%22%3A%22BTC%2FUSD%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3AETHUSD%22%2C%22title%22%3A%22ETH%2FUSD%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3ATSLA%22%2C%22title%22%3A%22Tesla%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AAAPL%22%2C%22title%22%3A%22Apple%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AAMZN%22%2C%22title%22%3A%22Amazon%22%7D%5D%2C%22showSymbolLogo%22%3Atrue%2C%22colorTheme%22%3A%22dark%22%2C%22isTransparent%22%3Atrue%2C%22displayMode%22%3A%22adaptive%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A44%2C%22utm_source%22%3A%22willz-max.github.io%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22ticker-tape%22%2C%22page-uri%22%3A%22willz-max.github.io%2Finteractive%2F%22%7D" title="ticker tape TradingView widget" lang="en" style="user-select: none; box-sizing: border-box; display: block; height: 44px; width: 100%;"></iframe>
 
-    <!-- Features Section -->
     <section id="features" class="features-section">
         <div class="container">
             <h2 class="section-title">Powerful Features</h2>
             <p class="section-subtitle">Everything you need to manage your investments with confidence and ease</p>
             
             <div class="row g-4">
-                <!-- Feature 1 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
@@ -886,8 +1256,6 @@
                         <p class="feature-description">Access instantaneous market data and performance metrics to make informed decisions without delay.</p>
                     </div>
                 </div>
-
-                <!-- Feature 2 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
@@ -895,8 +1263,6 @@
                         <p class="feature-description">Our state-of-the-art encryption and security protocols ensure your assets and data remain protected 24/7.</p>
                     </div>
                 </div>
-
-                <!-- Feature 3 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-exchange-alt"></i></div>
@@ -904,8 +1270,6 @@
                         <p class="feature-description">Execute trades and manage funds quickly with lightning-fast transaction processing capabilities globally.</p>
                     </div>
                 </div>
-
-                <!-- Feature 4 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
@@ -913,8 +1277,6 @@
                         <p class="feature-description">Receive detailed, customized reports on your financial performance and strategic projections monthly.</p>
                     </div>
                 </div>
-
-                <!-- Feature 5 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-robot"></i></div>
@@ -922,8 +1284,6 @@
                         <p class="feature-description">Leverage artificial intelligence to identify market trends and optimize your investment strategy.</p>
                     </div>
                 </div>
-
-                <!-- Feature 6 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
@@ -931,8 +1291,6 @@
                         <p class="feature-description">Trade on the go with our fully responsive mobile platform for iOS and Android devices.</p>
                     </div>
                 </div>
-
-                <!-- Feature 7 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-users"></i></div>
@@ -940,8 +1298,6 @@
                         <p class="feature-description">Get 24/7 access to our team of financial experts ready to assist with your investment queries.</p>
                     </div>
                 </div>
-
-                <!-- Feature 8 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="feature-card">
                         <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
@@ -953,14 +1309,12 @@
         </div>
     </section>
 
-    <!-- Investment Opportunities Section -->
     <section id="investments" class="opportunities-section">
         <div class="container">
             <h2 class="section-title">Investment Opportunities</h2>
             <p class="section-subtitle">Explore our carefully curated investment products designed to maximize your returns</p>
             
             <div class="row g-4">
-                <!-- Staking Investment -->
                 <div class="col-lg-6">
                     <div class="opportunity-card">
                         <div class="position-relative">
@@ -977,7 +1331,6 @@
                     </div>
                 </div>
 
-                <!-- Forex Trading -->
                 <div class="col-lg-6">
                     <div class="opportunity-card">
                         <div class="position-relative">
@@ -994,35 +1347,33 @@
                     </div>
                 </div>
             </div>
-            <div class="row g-4">
-                <!-- Staking Investment -->
+            <div class="row g-4 mt-1">
                 <div class="col-lg-6">
                     <div class="opportunity-card">
                         <div class="position-relative">
-                            <img src="assets/image/stocks.jpg" alt="Staking Investment" class="opportunity-image">
+                            <img src="assets/image/stocks.jpg" alt="Stocks" class="opportunity-image">
                             <span class="opportunity-badge">High Dividends</span>
                         </div>
                         <div class="opportunity-content">
                             <h3 class="opportunity-title">Stock</h3>
                             <p class="opportunity-description">
-                                Professional stock trading services designed to help you invest with confidence. We offer advanced charting tools, fundamental analysis data, and commission-free trading on global markets tailored to your strategy.
+                                Professional stock trading services designed to help you invest with confidence. We offer advanced charting tools, fundamental analysis data, and commission-free trading.
                             </p>
                             <button class="btn btn-primary-custom w-100">Learn More</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Forex Trading -->
                 <div class="col-lg-6">
                     <div class="opportunity-card">
                         <div class="position-relative">
-                            <img src="assets/image/img/woman2.jpg" alt="Forex Trading" class="opportunity-image">
+                            <img src="assets/image/img/woman2.jpg" alt="Consulting" class="opportunity-image">
                             <span class="opportunity-badge">Smart Investment</span>
                         </div>
                         <div class="opportunity-content">
                             <h3 class="opportunity-title">Investment Consulting</h3>
                             <p class="opportunity-description">
-                                Professional business consulting services designed to help your organization grow and succeed. We offer strategic planning, operational improvements, and innovative solutions tailored to your specific needs...
+                                Professional business consulting services designed to help your organization grow and succeed. We offer strategic planning, operational improvements, and innovative solutions.
                             </p>
                             <button class="btn btn-primary-custom w-100">Learn More</button>
                         </div>
@@ -1032,83 +1383,220 @@
         </div>
     </section>
 
-    <!-- Live Charts Section -->
-    <section id="charts" class="charts-section">
-        <div class="container">
-            <h2 class="section-title">Live Market Data</h2>
-            <p class="section-subtitle">Real-time analytics and market insights at your fingertips</p>
-            
-            <!-- Market Performance (BTC) -->
-            <div class="chart-container">
-                <div class="chart-header">
-                    <div>
-                        <h3 class="chart-title">Market Performance</h3>
-                        <p class="chart-subtitle">Sample market data visualization with real-time updates</p>
+    <section id="products" class="product-section">
+    <div class="product-floating-shapes">
+        <div class="product-floating-shape"></div>
+        <div class="product-floating-shape"></div>
+        <div class="product-floating-shape"></div>
+    </div>
+    
+    <div class="container">
+        <div class="product-content">
+            <h2 class="section-title">Comprehensive Trading Products</h2>
+            <p class="section-description">
+                Explore our diverse range of trading instruments designed to meet every investment strategy and goal.
+            </p>
+
+            <!-- Copy Trading -->
+            <div class="product-feature row align-items-center">
+                <div class="col-lg-6 col-md-12 feature-content">
+                    <div class="product-feature-icon">
+                        <i class="fa fa-users"></i>
                     </div>
-                    <button class="btn btn-primary-custom trade-btn-sm"><i class="fas fa-bolt me-2"></i>Trade Now</button>
+                    <h2 class="product-feature-title">Copy Trading</h2>
+                    <p class="product-feature-description">
+                        Automatically replicate the trades of successful investors in real-time. Mirror strategies with customizable risk parameters and join a community of profitable traders.
+                    </p>
+                    <div class="product-feature-box">
+                        <h3 class="product-feature-box-title">Key Features</h3>
+                        <ul class="product-feature-list">
+                            <li>Follow unlimited professional traders</li>
+                            <li>Customize copy amounts and risk levels</li>
+                            <li>Set advanced risk management limits</li>
+                            <li>Real-time performance tracking dashboard</li>
+                            <li>One-click copy setup and management</li>
+                        </ul>
+                    </div>
+                    <button class="product-cta-button">Learn More</button>
                 </div>
-                
-                <div class="chart-wrapper">
-                    <div class="tradingview-widget-container" style="height:100%;width:100%">
-                        <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-                        {
-                            "autosize": true,
-                            "symbol": "BINANCE:BTCUSDT",
-                            "interval": "D",
-                            "timezone": "Etc/UTC",
-                            "theme": "dark",
-                            "style": "1",
-                            "locale": "en",
-                            "enable_publishing": false,
-                            "backgroundColor": "rgba(24, 26, 32, 1)",
-                            "gridColor": "rgba(43, 49, 57, 1)",
-                            "allow_symbol_change": true,
-                            "calendar": false,
-                            "support_host": "https://www.tradingview.com"
-                        }
-                        </script>
-                    </div>
+                <div class="col-lg-6 col-md-12 product-feature-image">
+                    <img src="assets/image/op-copy-trade.jpg" alt="Copy Trading Platform" />
                 </div>
             </div>
 
-            <!-- Forex Market -->
-            <div class="chart-container mt-4">
-                <div class="chart-header">
-                    <div>
-                        <h3 class="chart-title">Forex Market</h3>
-                        <p class="chart-subtitle">Major currency pairs live data</p>
+            <!-- Cryptocurrency Staking -->
+            <div class="product-feature row align-items-center flex-row-reverse">
+                <div class="col-lg-6 col-md-12 feature-content">
+                    <div class="product-feature-icon">
+                        <i class="fa fa-university"></i>
                     </div>
-                    <button class="btn btn-primary-custom trade-btn-sm"><i class="fas fa-bolt me-2"></i>Trade Now</button>
-                </div>
-                
-                <div class="chart-wrapper">
-                    <div class="tradingview-widget-container" style="height:100%;width:100%">
-                        <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-                        {
-                            "autosize": true,
-                            "symbol": "FX:EURUSD",
-                            "interval": "D",
-                            "timezone": "Etc/UTC",
-                            "theme": "dark",
-                            "style": "1",
-                            "locale": "en",
-                            "enable_publishing": false,
-                            "backgroundColor": "rgba(24, 26, 32, 1)",
-                            "gridColor": "rgba(43, 49, 57, 1)",
-                            "allow_symbol_change": true,
-                            "calendar": false,
-                            "support_host": "https://www.tradingview.com"
-                        }
-                        </script>
+                    <h2 class="product-feature-title">Cryptocurrency Staking</h2>
+                    <p class="product-feature-description">
+                        Earn passive income by staking your crypto assets with flexible lock-up periods and highly competitive yields across multiple blockchain networks.
+                    </p>
+                    <div class="product-feature-box">
+                        <h3 class="product-feature-box-title">Staking Benefits</h3>
+                        <ul class="product-feature-list">
+                            <li>High APY rates up to 25% annually</li>
+                            <li>Multiple cryptocurrencies supported</li>
+                            <li>Flexible and fixed-term options</li>
+                            <li>Compound interest optimization</li>
+                            <li>Automatic rewards distribution</li>
+                        </ul>
                     </div>
+                    <button class="product-cta-button">Start Staking</button>
                 </div>
+                <div class="col-lg-6 col-md-12 product-feature-image">
+                    <img src="assets/image/op-staking.jpg" alt="Cryptocurrency Staking" />
+                </div>
+            </div>
+
+            <!-- Exchange-Traded Funds -->
+            <div class="product-feature row align-items-center">
+                <div class="col-lg-6 col-md-12 feature-content">
+                    <div class="product-feature-icon">
+                        <i class="fa fa-bar-chart"></i>
+                    </div>
+                    <h2 class="product-feature-title">Exchange-Traded Funds</h2>
+                    <p class="product-feature-description">
+                        Invest in diversified ETFs that track indices, sectors, commodities, and more with exceptionally low fees and global market exposure.
+                    </p>
+                    <div class="product-feature-box">
+                        <h3 class="product-feature-box-title">ETF Advantages</h3>
+                        <ul class="product-feature-list">
+                            <li>Sector-specific and thematic ETFs</li>
+                            <li>Comprehensive global market coverage</li>
+                            <li>Ultra-low expense ratios</li>
+                            <li>Automatic dividend reinvestment</li>
+                            <li>Fractional share investing available</li>
+                        </ul>
+                    </div>
+                    <button class="product-cta-button">Explore ETFs</button>
+                </div>
+                <div class="col-lg-6 col-md-12 product-feature-image">
+                    <img src="assets/image/op-etf.jpg" alt="ETF Trading" />
+                </div>
+            </div>
+
+            <!-- Global Stock Trading -->
+            <div class="product-feature row align-items-center flex-row-reverse">
+                <div class="col-lg-6 col-md-12 feature-content">
+                    <div class="product-feature-icon">
+                        <i class="fa fa-line-chart"></i>
+                    </div>
+                    <h2 class="product-feature-title">Global Stock Trading</h2>
+                    <p class="product-feature-description">
+                        Trade thousands of stocks worldwide with advanced charting tools, real-time data, and commission-free trading on select international markets.
+                    </p>
+                    <div class="product-feature-box">
+                        <h3 class="product-feature-box-title">Trading Features</h3>
+                        <ul class="product-feature-list">
+                            <li>Access to global stock exchanges</li>
+                            <li>Advanced technical analysis tools</li>
+                            <li>Comprehensive fundamental data</li>
+                            <li>Extended hours trading sessions</li>
+                            <li>Dividend tracking and optimization</li>
+                        </ul>
+                    </div>
+                    <button class="product-cta-button">Trade Stocks</button>
+                </div>
+                <div class="col-lg-6 col-md-12 product-feature-image">
+                    <img src="assets/image/op-global.jpg" alt="Stock Trading Platform" />
+                </div>
+            </div>
+
+            <!-- CFD Trading -->
+            <div class="product-feature row align-items-center">
+                <div class="col-lg-6 col-md-12 feature-content">
+                    <div class="product-feature-icon">
+                        <i class="fa fa-usd"></i>
+                    </div>
+                    <h2 class="product-feature-title">CFD Trading</h2>
+                    <p class="product-feature-description">
+                        Trade CFDs on multiple markets with flexible leverage options. Speculate on rising or falling prices without owning the underlying assets.
+                    </p>
+                    <div class="product-feature-box">
+                        <h3 class="product-feature-box-title">CFD Benefits</h3>
+                        <ul class="product-feature-list">
+                            <li>Flexible leverage options up to 1:500</li>
+                            <li>Short selling capabilities</li>
+                            <li>Ultra-tight spreads from 0.1 pips</li>
+                            <li>Negative balance protection included</li>
+                            <li>Advanced hedging capabilities</li>
+                        </ul>
+                    </div>
+                    <button class="product-cta-button">Trade CFDs</button>
+                </div>
+                <div class="col-lg-6 col-md-12 product-feature-image">
+                    <img src="assets/image/op-CFD.jpg" alt="CFD Trading" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <section id="live-trading" class="live-trading-section">
+        <div class="container">
+            <h2 class="section-title">Live Trading Activity</h2>
+            <p class="section-subtitle">See a snapshot of real-time trades. Rows automatically re-rank based on highest current profit.</p>
+            
+            <div class="live-trading-container">
+               <div class="widget-section">
+      <!-- Ticker Tape Widget -->
+      <div class="mb-4">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+          {
+            "symbols": [
+              {"proName": "FOREXCOM:SPXUSD", "title": "S&P 500"},
+              {"proName": "FOREXCOM:NSXUSD", "title": "US 100"},
+              {"proName": "FX_IDC:EURUSD", "title": "EUR to USD"},
+              {"proName": "BITSTAMP:BTCUSD", "title": "Bitcoin"},
+              {"proName": "BITSTAMP:ETHUSD", "title": "Ethereum"}
+            ],
+            "showSymbolLogo": true,
+            "colorTheme": "light",
+            "isTransparent": true,
+            "displayMode": "regular",
+            "locale": "en"
+          }
+          </script>
+        </div>
+      </div>
+
+      <!-- Market Overview Widget -->
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+      {
+        "colorTheme": "light",
+        "dateRange": "12M",
+        "showChart": true,
+        "locale": "en",
+        "isTransparent": true,
+        "showSymbolLogo": true,
+        "width": "100%",
+        "height": "600",
+        "tabs": [
+          {"title": "Crypto", "symbols": [
+            {"s": "BINANCE:BTCUSDT"},
+            {"s": "BINANCE:ETHUSDT"},
+            {"s": "BINANCE:XRPUSDT"}
+          ]},
+          {"title": "Forex", "symbols": [
+            {"s": "FX:EURUSD"},
+            {"s": "FX:GBPUSD"},
+            {"s": "FX:USDJPY"}
+          ]}
+        ]
+      }
+      </script>
+    </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials-section">
         <div class="container">
             <h2 class="section-title">What Our Clients Say</h2>
@@ -1142,7 +1630,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
             <h2 class="section-title">Our Mission: Clarity, Security, Growth</h2>
@@ -1158,7 +1645,6 @@
                 </div>
             </div>
 
-            <!-- Stats -->
             <div class="stats-container">
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-users"></i></div>
@@ -1185,7 +1671,6 @@
                 </div>
             </div>
 
-            <!-- Core Values -->
             <div class="values-container">
                 <div class="value-item">
                     <h3 class="value-title">Clarity</h3>
@@ -1211,11 +1696,9 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact" class="footer">
         <div class="container">
             <div class="footer-content">
-                <!-- About -->
                 <div class="footer-section">
                     <h5>
                         <span style="font-size:1.2rem;">📈</span> Nico
@@ -1231,18 +1714,16 @@
                     </div>
                 </div>
 
-                <!-- Quick Links -->
                 <div class="footer-section">
                     <h5>Quick Links</h5>
                     <ul class="footer-links">
                         <li><a href="#features">Features</a></li>
-                        <li><a href="#charts">Live Charts</a></li>
+                        <li><a href="#live-trading">Live Trading</a></li>
                         <li><a href="#testimonials">Testimonials</a></li>
                         <li><a href="#about">About Us</a></li>
                     </ul>
                 </div>
 
-                <!-- Legal -->
                 <div class="footer-section">
                     <h5>Legal</h5>
                     <ul class="footer-links">
@@ -1253,7 +1734,6 @@
                     </ul>
                 </div>
 
-                <!-- Contact -->
                 <div class="footer-section">
                     <h5>Contact Us</h5>
                     <ul class="footer-links">
@@ -1275,7 +1755,6 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
         // === Mobile Sidebar Logic ===
         const mobileToggle = document.getElementById('mobileToggle');
@@ -1390,8 +1869,8 @@
             updateTestimonial(currentTestimonialIndex);
         }
 
-        // Auto-rotate testimonials
         setInterval(nextTestimonial, 7000);
+
 
     </script>
 </body>
