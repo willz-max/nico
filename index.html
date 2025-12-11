@@ -3,73 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nico - Your Trusted Investment Partner</title>
+    <title>Nico - Next Gen Investment Platform</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
       /* ==========================================
-         NICO INVESTMENT PLATFORM - BINANCE THEME
+         NICO PREMIUM THEME - "Cyber-Finance"
          ========================================== */
 
         :root {
-            /* Binance-like Colors */
-            --primary-yellow: #F0B90B; /* The signature Binance Yellow */
-            --yellow-hover: #FCD535;
-            --dark-bg: #0B0E11;        /* Deep almost-black */
-            --darker-bg: #181A20;      /* Slightly lighter for cards/sections */
-            --card-bg: #1E2329;        /* Exchange card color */
-            --text-primary: #EAECEF;   /* Bright white/grey */
-            --text-secondary: #848E9C; /* Muted grey */
-            --border-color: #2B3139;
-            --success: #0ECB81;        /* Crypto green */
-            --danger: #F6465D;         /* Crypto red */
-            --transition: all 0.3s ease;
+            --primary-yellow: #F0B90B; 
+            --yellow-glow: rgba(240, 185, 11, 0.4);
+            --dark-bg: #060709;        /* Deeper, richer black */
+            --glass-bg: rgba(30, 35, 41, 0.6); /* Translucent */
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #FFFFFF;
+            --text-secondary: #848E9C; 
+            --success: #0ECB81;        
+            --danger: #F6465D;         
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Global Reset & Typography */
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--dark-bg);
             color: var(--text-primary);
-            font-size: 0.9375rem; /* ~15px */
+            font-size: 16px;
             line-height: 1.6;
             overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(240, 185, 11, 0.03), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(14, 203, 129, 0.03), transparent 25%);
         }
 
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--text-primary);
+        h1, h2, h3, h4, h5 {
             font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
+        /* Tech font for numbers */
+        .tech-font {
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb { background: #2B3139; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-yellow); }
+
+        /* ==========================================
+           COMPONENTS
+           ========================================== */
+        
+        /* Glassmorphism Card Utility */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(240, 185, 11, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(240, 185, 11, 0.05);
+        }
+
+        /* Buttons */
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, #FCD535 100%);
+            color: #000;
+            font-weight: 600;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 15px var(--yellow-glow);
+        }
+
+        .btn-primary-custom::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: var(--transition);
+            z-index: -1;
+            transform: skewX(20deg) translateX(-50%);
+        }
+
+        .btn-primary-custom:hover::before { width: 200%; }
+        .btn-primary-custom:hover { transform: translateY(-2px); box-shadow: 0 5px 25px var(--yellow-glow); color: #000; }
+
+        .btn-outline-custom {
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-primary);
+            background: transparent;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+
+        .btn-outline-custom:hover {
+            border-color: var(--primary-yellow);
+            color: var(--primary-yellow);
+            background: rgba(240, 185, 11, 0.05);
         }
 
         /* ==========================================
-           CUSTOM NAVIGATION
+           NAVIGATION
            ========================================== */
         .custom-nav {
-            background-color: rgba(11, 14, 17, 0.95);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 0.8rem 2rem;
+            background: rgba(6, 7, 9, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 2rem;
             position: fixed;
             width: 100%;
             top: 0;
@@ -80,164 +149,51 @@
         }
 
         .nav-logo {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-size: 1.6rem;
+            font-weight: 800;
             color: var(--primary-yellow);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            letter-spacing: -0.5px;
         }
-
-        .nav-logo span {
-            color: var(--text-primary);
+        
+        .desktop-menu { display: flex; align-items: center; gap: 35px; }
+        .nav-link { 
+            font-size: 0.95rem; 
+            font-weight: 500; 
+            color: var(--text-secondary); 
+            position: relative;
         }
-
-        /* Desktop Menu */
-        .desktop-menu {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .nav-link {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover {
-            color: var(--primary-yellow);
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        /* Mobile Trigger */
-        .mobile-toggle {
-            display: none;
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            cursor: pointer;
-        }
-
-        /* Sidebar / Drawer for Mobile */
-        .mobile-sidebar {
-            position: fixed;
-            top: 0;
-            right: -300px; /* Hidden by default */
-            width: 280px;
-            height: 100vh;
-            background-color: var(--darker-bg);
-            border-left: 1px solid var(--border-color);
-            padding: 2rem;
-            z-index: 1001;
-            transition: right 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0);
-            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .mobile-sidebar.active {
-            right: 0;
-        }
-
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1rem;
-        }
-
-        .close-sidebar {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .close-sidebar:hover {
-            color: var(--primary-yellow);
-        }
-
-        .sidebar-links {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .sidebar-link {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .sidebar-link:hover {
-            color: var(--primary-yellow);
-            padding-left: 5px;
-        }
-
-        /* Overlay */
-        .overlay {
-            position: fixed;
-            top: 0;
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            backdrop-filter: blur(2px);
-        }
-
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* ==========================================
-           BUTTONS
-           ========================================== */
-        .btn-primary-custom {
             background-color: var(--primary-yellow);
-            color: #000000; 
-            font-weight: 600;
-            padding: 10px 24px;
-            border: none;
-            border-radius: 4px; 
             transition: var(--transition);
-            font-size: 0.9rem;
-            text-transform: uppercase;
         }
+        
+        .nav-link:hover { color: var(--text-primary); }
+        .nav-link:hover::after { width: 100%; }
 
-        .btn-primary-custom:hover {
-            background-color: var(--yellow-hover);
-            transform: translateY(-1px);
+        /* Mobile Sidebar */
+        .mobile-sidebar {
+            position: fixed; top: 0; right: -320px; width: 300px; height: 100vh;
+            background: #181A20; border-left: 1px solid var(--glass-border);
+            padding: 2rem; z-index: 1002; transition: right 0.4s ease;
         }
-
-        .btn-outline-custom {
-            border: 1px solid var(--border-color); 
-            color: var(--text-primary);
-            background: transparent;
-            padding: 10px 24px;
-            border-radius: 4px;
-            font-weight: 500;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            text-transform: uppercase;
+        .mobile-sidebar.active { right: 0; }
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: 1001;
+            opacity: 0; visibility: hidden; transition: var(--transition);
+            backdrop-filter: blur(5px);
         }
-
-        .btn-outline-custom:hover {
-            color: var(--primary-yellow);
-            border-color: var(--primary-yellow);
-        }
+        .overlay.active { opacity: 1; visibility: visible; }
 
         /* ==========================================
            HERO SECTION
@@ -249,630 +205,126 @@
             align-items: center;
             padding-top: 80px;
             overflow: hidden;
-            background: radial-gradient(circle at 10% 20%, rgba(240, 185, 11, 0.05) 0%, rgba(11, 14, 17, 1) 50%);
-        }
-
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
         }
 
         .video-background video {
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-            opacity: 0.4;
+            position: absolute; top: 50%; left: 50%; 
+            min-width: 100%; min-height: 100%; 
+            transform: translate(-50%, -50%); opacity: 0.3; object-fit: cover;
         }
-
+        
         .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(11, 14, 17, 0.9), rgba(11, 14, 17, 0.8));
-            z-index: 1;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(6,7,9,0.9) 0%, rgba(6,7,9,0.7) 50%, var(--dark-bg) 100%);
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
+        .hero-content { z-index: 2; position: relative; }
+        
         .hero-title {
-            font-size: 3rem; 
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
+            font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #848E9C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .hero-title .static-text {
-            color: var(--text-primary);
+        
+        .dynamic-text { 
+            color: var(--primary-yellow); 
+            -webkit-text-fill-color: var(--primary-yellow);
         }
-
-        .hero-title .dynamic-text {
-            color: var(--primary-yellow);
-            display: inline-block;
-            min-width: 300px;
-            animation: fadeInOut 1s ease-in-out;
-        }
-
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateY(20px); }
-            20% { opacity: 1; transform: translateY(0); }
-            80% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-20px); }
-        }
-
+        
         .hero-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            line-height: 1.6;
+            font-size: 1.25rem; color: var(--text-secondary); 
+            margin-bottom: 2.5rem; max-width: 650px; font-weight: 300;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+        .hero-stats {
+            display: flex; gap: 40px; margin-top: 3rem; border-top: 1px solid var(--glass-border); padding-top: 2rem;
         }
+        .hero-stat-item h4 { font-size: 2rem; color: var(--primary-yellow); margin: 0; }
+        .hero-stat-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; text-transform: uppercase; }
 
         /* ==========================================
-           FEATURES SECTION
-           ========================================== */
-        .features-section {
-            padding: 100px 0;
-            background: var(--dark-bg);
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            color: var(--primary-yellow);
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 4rem;
-            text-align: center;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem;
-            transition: var(--transition);
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-yellow);
-            box-shadow: 0 10px 30px rgba(240, 185, 11, 0.1);
-        }
-
-        .feature-icon {
-            width: 55px;
-            height: 55px;
-            background: rgba(240, 185, 11, 0.1);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.6rem;
-            color: var(--primary-yellow);
-        }
-
-        .feature-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            color: var(--text-primary);
-        }
-
-        .feature-description {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* ==========================================
-           INVESTMENT OPPORTUNITIES
-           ========================================== */
-        .opportunities-section {
-            padding: 100px 0;
-            background: var(--darker-bg);
-        }
-
-        .opportunity-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: var(--transition);
-            height: 100%;
-        }
-
-        .opportunity-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            border-color: var(--border-color);
-        }
-
-        .opportunity-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            position: relative;
-        }
-
-        .opportunity-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--primary-yellow);
-            color: #000;
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-        }
-
-        .opportunity-content {
-            padding: 1.5rem;
-        }
-
-        .opportunity-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            color: var(--text-primary);
-        }
-
-        .opportunity-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-            font-size: 0.9rem;
-        }
-
-        /* ==========================================
-           LIVE TRADING SECTION
+           LIVE TRADING SECTION (RE-DESIGNED)
            ========================================== */
         .live-trading-section {
-            padding: 100px 0;
-            background: var(--dark-bg);
-        }
-
-        .live-trading-container {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
+            padding: 120px 0;
+            background: linear-gradient(180deg, var(--dark-bg) 0%, #0B0E11 100%);
             position: relative;
         }
-
-        .live-trading-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(246, 70, 93, 0.2);
-            color: var(--danger);
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 10;
+        
+        /* Background Grid */
+        .bg-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .live-trading-badge::before {
-            content: '';
-            display: block;
-            width: 8px;
-            height: 8px;
-            background-color: var(--danger);
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
+        .trading-terminal-mockup {
+            background: #13151b; /* Dark terminal bg */
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        @keyframes pulse {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-            margin-top: 2rem;
-        }
-
-        .custom-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            color: var(--text-primary);
-            font-size: 0.9rem;
-        }
-
-        .custom-table th,
-        .custom-table td {
-            padding: 14px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .custom-table th {
-            color: var(--text-secondary);
-            font-weight: 500;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
-        }
-
-        .custom-table tbody tr:hover {
-            background-color: var(--darker-bg);
-        }
-
-        .custom-table td {
-            font-weight: 500;
-        }
-
-        .text-success { color: var(--success) !important; }
-        .text-danger { color: var(--danger) !important; }
-
-        .mirrored-badge {
-            display: inline-block;
-            background: rgba(14, 203, 129, 0.2);
-            color: var(--success);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-right: 8px;
-        }
-
-        /* LIVE PRICE ANIMATIONS */
-        @keyframes flashGreen {
-            0% { background-color: rgba(14, 203, 129, 0.0); }
-            50% { background-color: rgba(14, 203, 129, 0.2); }
-            100% { background-color: rgba(14, 203, 129, 0.0); }
-        }
-
-        @keyframes flashRed {
-            0% { background-color: rgba(246, 70, 93, 0.0); }
-            50% { background-color: rgba(246, 70, 93, 0.2); }
-            100% { background-color: rgba(246, 70, 93, 0.0); }
-        }
-
-        .price-up { animation: flashGreen 1s ease-out; }
-        .price-down { animation: flashRed 1s ease-out; }
-
-        /* Smooth row reordering */
-        #live-trade-body tr {
-            transition: all 0.5s ease;
-        }
-
-        .loading-row td {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
-        }
-
-        /* ==========================================
-           TESTIMONIALS SECTION
-           ========================================== */
-        .testimonials-section {
-            padding: 100px 0;
-            background: var(--darker-bg);
-        }
-
-        .testimonial-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 3rem;
-            text-align: center;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 4rem;
-            color: var(--primary-yellow);
-            opacity: 0.2;
-            font-family: Georgia, serif;
-        }
-
-        .testimonial-text {
-            font-size: 1.1rem;
-            font-style: italic;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        .testimonial-author-img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 2px solid var(--primary-yellow);
-            margin: 0 auto 1rem;
-            object-fit: cover;
-        }
-
-        .testimonial-author-name {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary-yellow);
-            margin-bottom: 0.3rem;
-        }
-
-        .testimonial-author-title {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .testimonial-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-top: 2rem;
-        }
-
-        .testimonial-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--border-color);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .testimonial-dot.active {
-            background: var(--primary-yellow);
-            transform: scale(1.2);
-        }
-
-        .testimonial-arrow {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            width: 36px;
-            height: 36px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .testimonial-arrow:hover {
-            background: var(--primary-yellow);
-            color: #000;
-            border-color: var(--primary-yellow);
-        }
-
-        /* ==========================================
-           ABOUT SECTION
-           ========================================== */
-        .about-section {
-            padding: 100px 0;
-            background: var(--dark-bg);
-        }
-
-        .mission-text {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            text-align: justify;
-        }
-
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .stat-card:hover {
-            border-color: var(--primary-yellow);
-            transform: translateY(-5px);
-        }
-
-        .stat-icon {
-            font-size: 2rem;
-            color: var(--primary-yellow);
-            margin-bottom: 1rem;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-yellow);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .values-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .value-item {
-            text-align: center;
-        }
-
-        .value-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--primary-yellow);
-            margin-bottom: 1rem;
-        }
-
-        .value-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        /* ==========================================
-           FOOTER
-           ========================================== */
-        .footer {
-            background: var(--dark-bg);
-            border-top: 1px solid var(--border-color);
-            padding: 60px 0 20px;
-            font-size: 0.9rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-section h5 {
-            color: var(--primary-yellow);
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--primary-yellow);
-            padding-left: 5px;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 12px;
-        }
-
-        .social-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-
-        .social-icon:hover {
-            background: var(--primary-yellow);
-            color: var(--dark-bg);
-            border-color: var(--primary-yellow);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid var(--border-color);
-            padding-top: 2rem;
+        .terminal-header {
+            background: #1E2026;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+            border-bottom: 1px solid var(--glass-border);
         }
 
-        .footer-copyright {
-            color: var(--text-secondary);
+        .terminal-dots { display: flex; gap: 6px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot.red { background: #FF5F56; }
+        .dot.yellow { background: #FFBD2E; }
+        .dot.green { background: #27C93F; }
+
+        .terminal-tabs span {
+            font-size: 0.85rem; color: var(--text-secondary); margin-left: 20px; cursor: pointer;
+            transition: 0.3s;
+        }
+        .terminal-tabs span.active { color: var(--primary-yellow); font-weight: 600; }
+
+        .custom-table { width: 100%; border-collapse: separate; border-spacing: 0 4px; }
+        .custom-table th {
+            color: var(--text-secondary); font-size: 0.75rem; text-transform: uppercase;
+            padding: 12px 15px; font-weight: 500;
+        }
+        .custom-table td {
+            background: #181A20; padding: 12px 15px; font-size: 0.9rem;
+            border-top: 1px solid transparent; border-bottom: 1px solid transparent;
+            position: relative; overflow: hidden;
+        }
+        
+        /* Depth bars visual */
+        .depth-bar {
+            position: absolute; top: 0; right: 0; height: 100%;
+            background: rgba(14, 203, 129, 0.05); z-index: 0;
+            transition: width 0.5s ease;
+        }
+        .depth-bar.sell { background: rgba(246, 70, 93, 0.05); }
+
+        .trading-feature-list li {
+            margin-bottom: 1.5rem; display: flex; gap: 15px;
+        }
+        .trading-feature-icon {
+            width: 40px; height: 40px; border-radius: 8px; background: rgba(240, 185, 11, 0.1);
+            color: var(--primary-yellow); display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
         }
 
-        .footer-tagline {
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
-        /* ==========================================
-           RESPONSIVE
-           ========================================== */
-        @media (max-width: 991px) {
-            .desktop-menu { display: none; }
-            .mobile-toggle { display: block; }
-            .hero-title { font-size: 2.5rem; }
-            .hero-content { text-align: center; }
-            .hero-buttons { justify-content: center; }
-        }
-
-        @media (max-width: 576px) {
-            .hero-title { font-size: 2rem; }
-            .feature-card, .opportunity-content, .testimonial-card, .stat-card { padding: 1.5rem; }
-            .custom-table th, .custom-table td { padding: 10px; font-size: 0.8rem; }
-            .mirrored-badge { font-size: 0.65rem; padding: 3px 6px; }
-        }
-
-        /* ==========================================
-   PRODUCTS SECTION
+       /* ==========================================
+   PRODUCTS SECTION (COMPREHENSIVE)
    ========================================== */
 .product-section {
-    padding: 100px 0;
+    padding: 120px 0;
     background: var(--dark-bg);
     position: relative;
     overflow: hidden;
@@ -903,7 +355,7 @@
 }
 
 .product-feature {
-    margin-bottom: 80px;
+    margin-bottom: 100px;
     padding: 40px 0;
 }
 
@@ -958,11 +410,12 @@
 
 .product-feature-box {
     margin-top: 30px;
-    background: var(--card-bg);
-    border-radius: 8px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--glass-border);
     transition: var(--transition);
 }
 
@@ -1014,10 +467,10 @@
 .product-feature-image img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     transition: var(--transition);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--glass-border);
 }
 
 .product-feature-image img:hover {
@@ -1029,9 +482,9 @@
 .product-cta-button {
     display: inline-block;
     background: linear-gradient(135deg, var(--primary-yellow), var(--yellow-hover));
-    color: var(--dark-bg);
+    color: var(--primary-yellow);
     padding: 12px 32px;
-    border-radius: 4px;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
@@ -1166,28 +619,580 @@
         font-size: 1.3rem;
     }
 }
+.feature-icon-lg{
+    font-size: 2.5rem;
+    color: var(--primary-yellow);
+    margin-bottom: 20px;
+}
+
+/* ==========================================
+   ABOUT SECTION
+   ========================================== */
+.about-section {
+    padding: 120px 0;
+    background: var(--dark-bg);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.section-tag {
+    color: var(--primary-yellow);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.mission-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    text-align: justify;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 4rem 0;
+}
+
+.stat-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    border-color: var(--primary-yellow);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(240, 185, 11, 0.1);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    color: var(--primary-yellow);
+    margin-bottom: 1.5rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-yellow);
+    margin-bottom: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.values-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-top: 4rem;
+}
+
+.value-item {
+    text-align: center;
+}
+
+.value-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-yellow);
+    margin-bottom: 1rem;
+}
+
+.value-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ==========================================
+   TESTIMONIALS SECTION
+   ========================================== */
+.testimonials-section {
+    padding: 120px 0;
+    background: linear-gradient(180deg, var(--dark-bg) 0%, #0B0E11 100%);
+}
+
+.testimonial-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+}
+
+.testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5rem;
+    color: var(--primary-yellow);
+    opacity: 0.2;
+    font-family: Georgia, serif;
+}
+
+.testimonial-text {
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.testimonial-author-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-yellow);
+    margin: 0 auto 1rem;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(240, 185, 11, 0.3);
+}
+
+.testimonial-author-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-yellow);
+    margin-bottom: 0.3rem;
+}
+
+.testimonial-author-title {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.testimonial-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 3rem;
+}
+
+.testimonial-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--glass-border);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.testimonial-dot.active {
+    background: var(--primary-yellow);
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(240, 185, 11, 0.5);
+}
+
+.testimonial-arrow {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.testimonial-arrow:hover {
+    background: var(--primary-yellow);
+    color: #000;
+    border-color: var(--primary-yellow);
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .about-section, .testimonials-section {
+        padding: 80px 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .values-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .about-section, .testimonials-section {
+        padding: 60px 0;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card {
+        padding: 2rem;
+    }
+    
+    .testimonial-card {
+        padding: 2rem;
+    }
+}
+
+
+
+/* ==========================================
+   PREMIUM LIVE TRADING ROOM
+   ========================================== */
+.premium-trading-room {
+    padding: 120px 0;
+    background: linear-gradient(180deg, #0B0E11 0%, var(--dark-bg) 100%);
+    position: relative;
+}
+
+.trading-room-header {
+    background: linear-gradient(135deg, rgba(240, 185, 11, 0.1), rgba(14, 203, 129, 0.1));
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 40px;
+    backdrop-filter: blur(12px);
+}
+
+.live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(246, 70, 93, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--danger);
+}
+
+.live-pulse {
+    width: 10px;
+    height: 10px;
+    background: var(--danger);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.trader-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(14, 203, 129, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--success);
+    margin-left: 15px;
+}
+
+.trading-room-container {
+    background: #13151b;
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.room-header {
+    background: #1E2026;
+    padding: 20px;
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.room-title-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.room-lock-icons {
+    display: flex;
+    gap: 8px;
+}
+
+.lock-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.lock-icon.locked { color: #666; }
+.lock-icon.unlocked { color: var(--primary-yellow); }
+
+.active-traders-list {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.trader-item {
+    background: #181A20;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition);
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.trader-item:hover {
+    background: #1E2026;
+    transform: translateX(5px);
+}
+
+.trader-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.trader-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-yellow);
+    position: relative;
+}
+
+.trader-status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    background: var(--success);
+    border-radius: 50%;
+    border: 2px solid #181A20;
+}
+
+.trader-status.trading {
+    background: var(--danger);
+    animation: pulse 1.5s infinite;
+}
+
+.trader-details h5 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.trader-details p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.trader-badge {
+    background: linear-gradient(135deg, var(--primary-yellow), #FCD535);
+    color: #000;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: 8px;
+}
+
+.trader-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.trade-status {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.trade-status.buying {
+    background: rgba(14, 203, 129, 0.2);
+    color: var(--success);
+}
+
+.trade-status.selling {
+    background: rgba(246, 70, 93, 0.2);
+    color: var(--danger);
+}
+
+.trade-status.analyzing {
+    background: rgba(240, 185, 11, 0.2);
+    color: var(--primary-yellow);
+}
+
+.profit-indicator {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.join-room-btn {
+    background: linear-gradient(135deg, var(--primary-yellow), #FCD535);
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.join-room-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px var(--yellow-glow);
+}
+
+.muted-icon {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .premium-trading-room {
+        padding: 80px 0;
+    }
+    
+    .trading-room-header {
+        padding: 20px;
+    }
+    
+    .room-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .join-room-btn {
+        width: 100%;
+    }
+    
+    .trader-item {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .trader-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 576px) {
+    .premium-trading-room {
+        padding: 60px 0;
+    }
+    
+    .trader-count {
+        margin-left: 0;
+        margin-top: 10px;
+        display: flex;
+    }
+    
+    .active-traders-list {
+        max-height: 400px;
+    }
+    
+    .trader-badge {
+        display: block;
+        margin-left: 0;
+        margin-top: 5px;
+        width: fit-content;
+    }
+}
+        /* ==========================================
+           RESPONSIVE
+           ========================================== */
+        @media (max-width: 991px) {
+            .hero-title { font-size: 2.8rem; }
+            .hero-content { text-align: center; }
+            .hero-buttons, .hero-stats { justify-content: center; }
+            .mobile-toggle { display: block; font-size: 1.5rem; cursor: pointer; color: white; }
+            .desktop-menu { display: none; }
+            .trading-content-col { margin-bottom: 3rem; }
+        }
+        
+        
     </style>
 </head>
 <body>
 
     <div class="overlay" id="overlay"></div>
 
-    <nav class="custom-nav">
+    <nav class="custom-nav" data-aos="fade-down">
         <a href="#" class="nav-logo">
-            <span style="font-size:1.5rem;">📈</span> 
-            <span>Nico</span>
+            <i class="fas fa-chart-line"></i> Nico
         </a>
 
         <div class="desktop-menu">
             <a href="#features" class="nav-link">Features</a>
-            <a href="#investments" class="nav-link">Investments</a>
-            <a href="#live-trading" class="nav-link">Live Trading</a>
-            <a href="#testimonials" class="nav-link">Testimonials</a>
-            <a href="#about" class="nav-link">About Us</a>
-            <div class="nav-actions">
-                <button class="btn btn-outline-custom">Sign In</button>
-                <button class="btn btn-primary-custom">Join Us</button>
-            </div>
+            <a href="#products" class="nav-link">Products</a>
+            <a href="#live-trading" class="nav-link">Live Terminal</a>
+            <a href="#about" class="nav-link">About</a>
+            <div style="width: 1px; height: 24px; background: var(--glass-border); margin: 0 10px;"></div>
+            <button class="btn btn-outline-custom">Log In</button>
+            <button class="btn btn-primary-custom">Start Trading</button>
         </div>
 
         <div class="mobile-toggle" id="mobileToggle">
@@ -1196,25 +1201,22 @@
     </nav>
 
     <div class="mobile-sidebar" id="mobileSidebar">
-        <div class="sidebar-header">
+        <div class="d-flex justify-content-between align-items-center mb-5">
             <div class="nav-logo">Nico</div>
-            <div class="close-sidebar" id="closeSidebar">
-                <i class="fas fa-times"></i>
-            </div>
+            <i class="fas fa-times close-sidebar" id="closeSidebar" style="font-size:1.5rem; cursor:pointer;"></i>
         </div>
-        <div class="sidebar-links">
-            <a href="#features" class="sidebar-link">Features</a>
-            <a href="#investments" class="sidebar-link">Investments</a>
-            <a href="#live-trading" class="sidebar-link">Live Trading</a>
-            <a href="#testimonials" class="sidebar-link">Testimonials</a>
-            <a href="#about" class="sidebar-link">About Us</a>
-            <hr style="border-color: var(--border-color);">
-            <a href="#" class="sidebar-link">Sign In</a>
-            <a href="#" class="btn btn-primary-custom" style="text-align:center;">Join Us</a>
+        <div class="d-flex flex-column gap-4">
+            <a href="#features" class="text-white text-decoration-none fs-5">Features</a>
+            <a href="#products" class="text-white text-decoration-none fs-5">Products</a>
+            <a href="#live-trading" class="text-white text-decoration-none fs-5">Live Terminal</a>
+            <a href="#about" class="text-white text-decoration-none fs-5">About</a>
+            <hr class="border-secondary">
+            <a href="#" class="btn btn-outline-custom w-100 text-center">Log In</a>
+            <a href="#" class="btn btn-primary-custom w-100 text-center">Join Now</a>
         </div>
     </div>
 
-    <section id="home" class="hero-section">
+    <section class="hero-section">
         <div class="video-background">
             <video autoplay muted loop playsinline>
                 <source src="assets/image/hero.mp4" type="video/mp4">
@@ -1222,168 +1224,84 @@
             <div class="video-overlay"></div>
         </div>
         
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 hero-content">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-7" data-aos="fade-right" data-aos-duration="1000">
+                    <span class="section-tag"><i class="fas fa-bolt"></i> Fast. Secure. Limitless.</span>
                     <h1 class="hero-title">
-                        <span class="static-text">Nico – Your Trusted</span><br>
-                        <span class="dynamic-text" id="dynamicText">Investment Partner</span>
+                        Master the Markets with <br>
+                        <span class="dynamic-text" id="dynamicText">Intelligent Data</span>
                     </h1>
                     <p class="hero-subtitle">
-                        Harness the power of data-driven insights and secure technologies to grow your portfolio confidently. Join thousands of satisfied investors who trust Nico for their financial success.
+                        Experience the next evolution of trading. Institutional-grade execution, AI-driven analytics, and deep liquidity—all in one unified platform.
                     </p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary-custom">Get Started</button>
-                        <button class="btn btn-outline-custom">Learn More</button>
+                    <div class="hero-buttons d-flex gap-3">
+                        <button class="btn btn-primary-custom">Open Free Account</button>
+                        <button class="btn btn-outline-custom"><i class="fas fa-play me-2"></i> Watch Demo</button>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="hero-stat-item">
+                            <h4 class="tech-font">$12M+</h4>
+                            <p>Quarterly Volume</p>
+                        </div>
+                        <div class="hero-stat-item">
+                            <h4 class="tech-font">50ms</h4>
+                            <p>Ultra-Low Latency</p>
+                        </div>
+                        <div class="hero-stat-item">
+                            <h4 class="tech-font">2M+</h4>
+                            <p>Verified Users</p>
+                        </div>
                     </div>
                 </div>
+                <div class="col-lg-5 d-none d-lg-block" data-aos="fade-left" data-aos-delay="200">
+                   </div>
             </div>
         </div>
     </section>
-    
-    <iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22proName%22%3A%22FOREXCOM%3AEURUSD%22%2C%22title%22%3A%22EUR%2FUSD%22%7D%2C%7B%22proName%22%3A%22FOREXCOM%3AGBPUSD%22%2C%22title%22%3A%22GBP%2FUSD%22%7D%2C%7B%22proName%22%3A%22FOREXCOM%3AUSDJPY%22%2C%22title%22%3A%22USD%2FJPY%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22title%22%3A%22BTC%2FUSD%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3AETHUSD%22%2C%22title%22%3A%22ETH%2FUSD%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3ATSLA%22%2C%22title%22%3A%22Tesla%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AAAPL%22%2C%22title%22%3A%22Apple%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3AAMZN%22%2C%22title%22%3A%22Amazon%22%7D%5D%2C%22showSymbolLogo%22%3Atrue%2C%22colorTheme%22%3A%22dark%22%2C%22isTransparent%22%3Atrue%2C%22displayMode%22%3A%22adaptive%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A44%2C%22utm_source%22%3A%22willz-max.github.io%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22ticker-tape%22%2C%22page-uri%22%3A%22willz-max.github.io%2Finteractive%2F%22%7D" title="ticker tape TradingView widget" lang="en" style="user-select: none; box-sizing: border-box; display: block; height: 44px; width: 100%;"></iframe>
 
-    <section id="features" class="features-section">
-        <div class="container">
-            <h2 class="section-title">Powerful Features</h2>
-            <p class="section-subtitle">Everything you need to manage your investments with confidence and ease</p>
+    <div style="border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
+        <iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22proName%22%3A%22FOREXCOM%3AEURUSD%22%2C%22title%22%3A%22EUR%2FUSD%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22title%22%3A%22BTC%2FUSD%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3AETHUSD%22%2C%22title%22%3A%22ETH%2FUSD%22%7D%2C%7B%22proName%22%3A%22NASDAQ%3ATSLA%22%2C%22title%22%3A%22Tesla%22%7D%5D%2C%22colorTheme%22%3A%22dark%22%2C%22isTransparent%22%3Atrue%2C%22displayMode%22%3A%22adaptive%22%2C%22locale%22%3A%22en%22%7D" style="width: 100%; height: 46px; display: block;"></iframe>
+    </div>
+
+    <section id="features" class="py-5" style="background: var(--dark-bg);">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="section-tag">Why Choose Nico</span>
+                <h2 class="section-title">Engineered for Perfection</h2>
+                <p class="text-secondary mx-auto" style="max-width: 600px;">
+                    We've built a platform that combines the speed of a centralized exchange with the security of a fortress.
+                </p>
+            </div>
             
             <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                        <h3 class="feature-title">Real-Time Analytics</h3>
-                        <p class="feature-description">Access instantaneous market data and performance metrics to make informed decisions without delay.</p>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card p-4 h-100">
+                        <i class="fas fa-shield-alt feature-icon-lg"></i>
+                        <h4>Bank-Grade Security</h4>
+                        <p class="text-secondary">Cold storage wallets, multi-sig authorization, and real-time threat detection keep your assets safe.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-                        <h3 class="feature-title">Secure Portfolio</h3>
-                        <p class="feature-description">Our state-of-the-art encryption and security protocols ensure your assets and data remain protected 24/7.</p>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card p-4 h-100">
+                        <i class="fas fa-bolt feature-icon-lg"></i>
+                        <h4>Lightning Execution</h4>
+                        <p class="text-secondary">Our matching engine handles 100,000 orders per second with minimal latency and zero downtime.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-exchange-alt"></i></div>
-                        <h3 class="feature-title">Instant Transfers</h3>
-                        <p class="feature-description">Execute trades and manage funds quickly with lightning-fast transaction processing capabilities globally.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
-                        <h3 class="feature-title">Personalized Reporting</h3>
-                        <p class="feature-description">Receive detailed, customized reports on your financial performance and strategic projections monthly.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-robot"></i></div>
-                        <h3 class="feature-title">AI-Powered Insights</h3>
-                        <p class="feature-description">Leverage artificial intelligence to identify market trends and optimize your investment strategy.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
-                        <h3 class="feature-title">Mobile Trading</h3>
-                        <p class="feature-description">Trade on the go with our fully responsive mobile platform for iOS and Android devices.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-users"></i></div>
-                        <h3 class="feature-title">Expert Support</h3>
-                        <p class="feature-description">Get 24/7 access to our team of financial experts ready to assist with your investment queries.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
-                        <h3 class="feature-title">Portfolio Diversification</h3>
-                        <p class="feature-description">Build a balanced portfolio across multiple asset classes to minimize risk and maximize returns.</p>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card p-4 h-100">
+                        <i class="fas fa-brain feature-icon-lg"></i>
+                        <h4>AI Smart Insights</h4>
+                        <p class="text-secondary">Get predictive market analytics and sentiment analysis to time your entries and exits perfectly.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="investments" class="opportunities-section">
-        <div class="container">
-            <h2 class="section-title">Investment Opportunities</h2>
-            <p class="section-subtitle">Explore our carefully curated investment products designed to maximize your returns</p>
-            
-            <div class="row g-4">
-                <div class="col-lg-6">
-                    <div class="opportunity-card">
-                        <div class="position-relative">
-                            <img src="assets/image/staking-main.jpg" alt="Staking Investment" class="opportunity-image">
-                            <span class="opportunity-badge">Secure Passive Income</span>
-                        </div>
-                        <div class="opportunity-content">
-                            <h3 class="opportunity-title">Staking Investment</h3>
-                            <p class="opportunity-description">
-                                Participate in network validation and earn consistent rewards. We curate the most profitable and secure staking protocols for our clients.
-                            </p>
-                            <button class="btn btn-primary-custom w-100">Learn More</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="opportunity-card">
-                        <div class="position-relative">
-                            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400&fit=crop" alt="Forex Trading" class="opportunity-image">
-                            <span class="opportunity-badge">Global Markets</span>
-                        </div>
-                        <div class="opportunity-content">
-                            <h3 class="opportunity-title">Forex Trading</h3>
-                            <p class="opportunity-description">
-                                Leverage the world's most liquid market with precision execution and competitive spreads. Access tools for both automated and manual trading strategies.
-                            </p>
-                            <button class="btn btn-primary-custom w-100">Learn More</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-4 mt-1">
-                <div class="col-lg-6">
-                    <div class="opportunity-card">
-                        <div class="position-relative">
-                            <img src="assets/image/stocks.jpg" alt="Stocks" class="opportunity-image">
-                            <span class="opportunity-badge">High Dividends</span>
-                        </div>
-                        <div class="opportunity-content">
-                            <h3 class="opportunity-title">Stock</h3>
-                            <p class="opportunity-description">
-                                Professional stock trading services designed to help you invest with confidence. We offer advanced charting tools, fundamental analysis data, and commission-free trading.
-                            </p>
-                            <button class="btn btn-primary-custom w-100">Learn More</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="opportunity-card">
-                        <div class="position-relative">
-                            <img src="assets/image/dealing.jpg" alt="Consulting" class="opportunity-image">
-                            <span class="opportunity-badge">Smart Investment</span>
-                        </div>
-                        <div class="opportunity-content">
-                            <h3 class="opportunity-title">Investment Consulting</h3>
-                            <p class="opportunity-description">
-                                Professional business consulting services designed to help your organization grow and succeed. We offer strategic planning, operational improvements, and innovative solutions.
-                            </p>
-                            <button class="btn btn-primary-custom w-100">Learn More</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="products" class="product-section">
+   <section id="products" class="product-section">
     <div class="product-floating-shapes">
         <div class="product-floating-shape"></div>
         <div class="product-floating-shape"></div>
@@ -1392,16 +1310,19 @@
     
     <div class="container">
         <div class="product-content">
-            <h2 class="section-title">Comprehensive Trading Products</h2>
-            <p class="section-description">
-                Explore our diverse range of trading instruments designed to meet every investment strategy and goal.
-            </p>
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="section-tag">Trading Products</span>
+                <h2 class="section-title">Comprehensive Trading Solutions</h2>
+                <p class="section-description">
+                    Explore our diverse range of trading instruments designed to meet every investment strategy and goal.
+                </p>
+            </div>
 
             <!-- Copy Trading -->
-            <div class="product-feature row align-items-center">
+            <div class="product-feature row align-items-center" data-aos="fade-right">
                 <div class="col-lg-6 col-md-12 feature-content">
                     <div class="product-feature-icon">
-                        <i class="fa fa-users"></i>
+                        <i class="fas fa-users"></i>
                     </div>
                     <h2 class="product-feature-title">Copy Trading</h2>
                     <p class="product-feature-description">
@@ -1417,18 +1338,18 @@
                             <li>One-click copy setup and management</li>
                         </ul>
                     </div>
-                    <button class="product-cta-button">Learn More</button>
+                    <button class="product-cta-button">Browse Traders</button>
                 </div>
-                <div class="col-lg-6 col-md-12 product-feature-image">
+                <div class="col-lg-6 col-md-12 product-feature-image" data-aos="fade-left">
                     <img src="assets/image/op-copy-trade.jpg" alt="Copy Trading Platform" />
                 </div>
             </div>
 
             <!-- Cryptocurrency Staking -->
-            <div class="product-feature row align-items-center flex-row-reverse">
+            <div class="product-feature row align-items-center flex-lg-row-reverse" data-aos="fade-left">
                 <div class="col-lg-6 col-md-12 feature-content">
                     <div class="product-feature-icon">
-                        <i class="fa fa-university"></i>
+                        <i class="fas fa-coins"></i>
                     </div>
                     <h2 class="product-feature-title">Cryptocurrency Staking</h2>
                     <p class="product-feature-description">
@@ -1446,16 +1367,16 @@
                     </div>
                     <button class="product-cta-button">Start Staking</button>
                 </div>
-                <div class="col-lg-6 col-md-12 product-feature-image">
+                <div class="col-lg-6 col-md-12 product-feature-image" data-aos="fade-right">
                     <img src="assets/image/op-staking.jpg" alt="Cryptocurrency Staking" />
                 </div>
             </div>
 
             <!-- Exchange-Traded Funds -->
-            <div class="product-feature row align-items-center">
+            <div class="product-feature row align-items-center" data-aos="fade-right">
                 <div class="col-lg-6 col-md-12 feature-content">
                     <div class="product-feature-icon">
-                        <i class="fa fa-bar-chart"></i>
+                        <i class="fas fa-chart-bar"></i>
                     </div>
                     <h2 class="product-feature-title">Exchange-Traded Funds</h2>
                     <p class="product-feature-description">
@@ -1473,16 +1394,16 @@
                     </div>
                     <button class="product-cta-button">Explore ETFs</button>
                 </div>
-                <div class="col-lg-6 col-md-12 product-feature-image">
+                <div class="col-lg-6 col-md-12 product-feature-image" data-aos="fade-left">
                     <img src="assets/image/op-etf.jpg" alt="ETF Trading" />
                 </div>
             </div>
 
             <!-- Global Stock Trading -->
-            <div class="product-feature row align-items-center flex-row-reverse">
+            <div class="product-feature row align-items-center flex-lg-row-reverse" data-aos="fade-left">
                 <div class="col-lg-6 col-md-12 feature-content">
                     <div class="product-feature-icon">
-                        <i class="fa fa-line-chart"></i>
+                        <i class="fas fa-chart-line"></i>
                     </div>
                     <h2 class="product-feature-title">Global Stock Trading</h2>
                     <p class="product-feature-description">
@@ -1500,16 +1421,16 @@
                     </div>
                     <button class="product-cta-button">Trade Stocks</button>
                 </div>
-                <div class="col-lg-6 col-md-12 product-feature-image">
+                <div class="col-lg-6 col-md-12 product-feature-image" data-aos="fade-right">
                     <img src="assets/image/op-global.jpg" alt="Stock Trading Platform" />
                 </div>
             </div>
 
             <!-- CFD Trading -->
-            <div class="product-feature row align-items-center">
+            <div class="product-feature row align-items-center" data-aos="fade-right">
                 <div class="col-lg-6 col-md-12 feature-content">
                     <div class="product-feature-icon">
-                        <i class="fa fa-usd"></i>
+                        <i class="fas fa-exchange-alt"></i>
                     </div>
                     <h2 class="product-feature-title">CFD Trading</h2>
                     <p class="product-feature-description">
@@ -1527,7 +1448,7 @@
                     </div>
                     <button class="product-cta-button">Trade CFDs</button>
                 </div>
-                <div class="col-lg-6 col-md-12 product-feature-image">
+                <div class="col-lg-6 col-md-12 product-feature-image" data-aos="fade-left">
                     <img src="assets/image/op-CFD.jpg" alt="CFD Trading" />
                 </div>
             </div>
@@ -1536,995 +1457,824 @@
     </div>
 </section>
 
+
     <section id="live-trading" class="live-trading-section">
-        <div class="container">
-            <h2 class="section-title">Live Trading Activity</h2>
-            <p class="section-subtitle">See a snapshot of real-time trades. Rows automatically re-rank based on highest current profit.</p>
-            
-            <div class="live-trading-container">
-               <div class="widget-section">
-      <!-- Ticker Tape Widget -->
-      <div class="mb-4">
-        <div class="tradingview-widget-container">
-          <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-          {
-            "symbols": [
-              {"proName": "FOREXCOM:SPXUSD", "title": "S&P 500"},
-              {"proName": "FOREXCOM:NSXUSD", "title": "US 100"},
-              {"proName": "FX_IDC:EURUSD", "title": "EUR to USD"},
-              {"proName": "BITSTAMP:BTCUSD", "title": "Bitcoin"},
-              {"proName": "BITSTAMP:ETHUSD", "title": "Ethereum"}
-            ],
-            "showSymbolLogo": true,
-            "colorTheme": "light",
-            "isTransparent": true,
-            "displayMode": "regular",
-            "locale": "en"
-          }
-          </script>
+        <div class="bg-grid"></div>
+        <div class="container position-relative z-2">
+            <div class="row align-items-center">
+                
+                <div class="col-lg-5 trading-content-col" data-aos="fade-right">
+                    <span class="section-tag"><i class="fas fa-circle text-danger me-2 fa-xs"></i> Live Market Action</span>
+                    <h2 class="section-title">Institutional-Grade<br>Trading Infrastructure</h2>
+                    <p class="text-secondary mb-4">
+                        Don't just watch the market—dominate it. Our aggregated liquidity feeds ensure you get the best price execution across global markets.
+                    </p>
+                    
+                    <ul class="list-unstyled trading-feature-list">
+                        <li>
+                            <div class="trading-feature-icon"><i class="fas fa-microchip"></i></div>
+                            <div>
+                                <h5 class="mb-1">Microsecond Latency</h5>
+                                <p class="text-secondary small mb-0">Direct market access (DMA) execution speeds < 50ms.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="trading-feature-icon"><i class="fas fa-globe"></i></div>
+                            <div>
+                                <h5 class="mb-1">Deep Global Liquidity</h5>
+                                <p class="text-secondary small mb-0">Aggregated order books from top 10 global exchanges.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="trading-feature-icon"><i class="fas fa-robot"></i></div>
+                            <div>
+                                <h5 class="mb-1">Algorithmic Sentencing</h5>
+                                <p class="text-secondary small mb-0">Smart order routing to minimize slippage on large orders.</p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-4">
+                        <div class="d-flex align-items-center gap-3">
+                            <button class="btn btn-primary-custom">Launch Terminal</button>
+                            <div class="text-success small">
+                                <i class="fas fa-check-circle me-1"></i> Systems Operational
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="trading-terminal-mockup">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <div class="dot red"></div>
+                                <div class="dot yellow"></div>
+                                <div class="dot green"></div>
+                            </div>
+                            <div class="terminal-tabs">
+                                <span class="active">Live Trades</span>
+                                <span>Order Book</span>
+                                <span>Market Depth</span>
+                            </div>
+                        </div>
+                        
+                        <div class="p-3">
+                            <div class="table-responsive">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Pair</th>
+                                            <th>Time</th>
+                                            <th>Price</th>
+                                            <th>Amount</th>
+                                            <th class="text-end">Total (USD)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="liveTradingTableBody" class="tech-font">
+                                        </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="p-2 border-top border-secondary border-opacity-10 d-flex justify-content-between align-items-center bg-dark">
+                            <div class="small text-secondary ps-2">
+                                <i class="fas fa-wifi text-success me-2"></i> Connected: 14ms
+                            </div>
+                            <div class="small text-secondary pe-2">
+                                24h Vol: <span class="text-white">$482,931,022</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Market Overview Widget -->
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
-      {
-        "colorTheme": "light",
-        "dateRange": "12M",
-        "showChart": true,
-        "locale": "en",
-        "isTransparent": true,
-        "showSymbolLogo": true,
-        "width": "100%",
-        "height": "600",
-        "tabs": [
-          {"title": "Crypto", "symbols": [
-            {"s": "BINANCE:BTCUSDT"},
-            {"s": "BINANCE:ETHUSDT"},
-            {"s": "BINANCE:XRPUSDT"}
-          ]},
-          {"title": "Forex", "symbols": [
-            {"s": "FX:EURUSD"},
-            {"s": "FX:GBPUSD"},
-            {"s": "FX:USDJPY"}
-          ]}
-        ]
-      }
-      </script>
-      <!-- recent deals -->
-<section class="section">
-    <div class="container">
+    <!-- Premium Live Trading Room Section -->
+<section id="live-trading" class="premium-trading-room">
+    <div class="bg-grid"></div>
+    <div class="container position-relative z-2">
+        
+        <!-- Header Section -->
+        <div class="trading-room-header" data-aos="fade-up">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <div class="mb-3">
+                        <span class="live-indicator">
+                            <span class="live-pulse"></span>
+                            <span class="fw-bold">LIVE</span>
+                        </span>
+                        <span class="trader-count">
+                            <i class="fas fa-users"></i>
+                            <span id="activeTraderCount">427</span> Active Traders
+                        </span>
+                    </div>
+                    <h2 class="section-title mb-2">Premium Trading Room</h2>
+                    <p class="text-secondary mb-0">
+                        Join our exclusive community of professional traders. Watch real-time trades, learn strategies from experts, 
+                        and collaborate with elite investors making profitable moves across global markets 24/7.
+                    </p>
+                </div>
+                <button class="btn btn-primary-custom">
+                    <i class="fas fa-crown me-2"></i> Upgrade to Premium
+                </button>
+            </div>
+        </div>
+
         <div class="row">
-            <!-- title -->
-            
-            <!-- end title -->
-
-            <!-- deals table -->
-            <div class="col-12">
-                <div class="deals">
-                    <div class="deals__table-wrap">
-                        <table class="deals__table animated-table">
-                            <thead>
-                                <tr>
-                                    <th>Pair</th>
-                                    <th>Exchange</th>
-                                    <th>Date</th>
-                                    <th>Buy Price</th>
-                                    <th>Sell Price</th>
-                                    <th>Trade Volume</th>
-                                    <th>Profit</th>
-                                    <th>Spread</th>
-                                </tr>
-                            </thead>
-                            <tbody id="liveTradingTableBody">
-                                <!-- Table rows will be dynamically updated by JavaScript -->
-                            </tbody>
-                        </table>
+            <!-- Left Column - Trading Activity -->
+            <div class="col-lg-7 mb-4" data-aos="fade-right">
+                <div class="trading-room-container">
+                    <div class="room-header">
+                        <div class="room-title-section">
+                            <div class="room-lock-icons">
+                                <div class="lock-icon locked">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="lock-icon unlocked">
+                                    <i class="fas fa-lock-open"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="mb-0" style="color: var(--text-primary); font-size: 1.1rem;">
+                                    <i class="fas fa-chart-line me-2" style="color: var(--primary-yellow);"></i>
+                                    Trade With Elite Investors
+                                </h4>
+                                <p class="mb-0 small text-secondary">
+                                    (<span id="liveCountDisplay">427</span> Live Now)
+                                </p>
+                            </div>
+                        </div>
+                        <button class="join-room-btn">
+                            <i class="fas fa-video me-2"></i> Join Room
+                        </button>
                     </div>
 
-                    <!-- Live trading indicator -->
-                    <div class="live-indicator">
-                        <span class="live-dot"></span>
-                        <span class="live-text">Live Trading</span>
+                    <div class="active-traders-list" id="activeTradersList">
+                        <!-- Traders will be dynamically inserted here -->
                     </div>
-
-                    <!-- design elements -->
-                    <span class="screw screw--lines-bl"></span>
-                    <span class="screw screw--lines-br"></span>
-                    <span class="screw screw--lines-tr"></span>
-                    <span class="screw screw--lines-tl"></span>
                 </div>
             </div>
-            <!-- end deals table -->
 
-            <div class="col-12">
-                <!-- section btns -->
-                <!--<div class="section__btns">-->
-                <!--    <a href="reports.html" class="section__btn">View Full Trade Reports</a>-->
-                <!--</div>-->
-                <!-- end section btns -->
+            <!-- Right Column - Live Stats & Market Data -->
+            <div class="col-lg-5" data-aos="fade-left">
+                <div class="trading-terminal-mockup mb-4">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        <div class="terminal-tabs">
+                            <span class="active">Live Trades</span>
+                            <span>Market Depth</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-3">
+                        <div class="table-responsive">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>Pair</th>
+                                        <th>Price</th>
+                                        <th class="text-end">Volumes</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="liveTradingTableBody" class="tech-font">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="p-2 border-top border-secondary border-opacity-10 d-flex justify-content-between align-items-center bg-dark">
+                        <div class="small text-secondary ps-2">
+                            <i class="fas fa-wifi text-success me-2"></i> Connected
+                        </div>
+                        <div class="small text-secondary pe-2">
+                            24h Vol: <span class="text-white">$482M</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Highlights -->
+                <div class="glass-card p-4">
+                    <h5 class="mb-4" style="color: var(--primary-yellow);">
+                        <i class="fas fa-star me-2"></i>Premium Benefits
+                    </h5>
+                    <ul class="list-unstyled trading-feature-list">
+                        <li>
+                            <div class="trading-feature-icon"><i class="fas fa-copy"></i></div>
+                            <div>
+                                <h6 class="mb-1">Copy Top Traders</h6>
+                                <p class="text-secondary small mb-0">Replicate successful strategies automatically</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="trading-feature-icon"><i class="fas fa-comments"></i></div>
+                            <div>
+                                <h6 class="mb-1">Live Voice Chat</h6>
+                                <p class="text-secondary small mb-0">Discuss strategies with professionals</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="trading-feature-icon"><i class="fas fa-bell"></i></div>
+                            <div>
+                                <h6 class="mb-1">Trade Alerts</h6>
+                                <p class="text-secondary small mb-0">Get instant notifications on major moves</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <section id="about" class="about-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="section-tag"><i class="fas fa-building me-2"></i> About Nico</span>
+            <h2 class="section-title">Our Mission: Clarity, Security, Growth</h2>
+        </div>
+        
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
+                <p class="mission-text">
+                    At Nico, our mission is simple: to make sophisticated investment accessible to everyone. We believe in clarity—providing straightforward data without unnecessary complexity. Our core values center around absolute security and delivering consistent growth for our clients.
+                </p>
+                <p class="mission-text">
+                    Founded in 2018, Nico has quickly become a leader in fintech innovation, managing over $5 billion in assets and servicing thousands of satisfied clients worldwide. We are committed to technological excellence and ethical practices, ensuring you always have a trustworthy partner on your financial journey.
+                </p>
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="stat-number">$5B+</div>
+                <div class="stat-label">Assets Managed</div>
+            </div>
+
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-icon"><i class="fas fa-globe"></i></div>
+                <div class="stat-number">120+</div>
+                <div class="stat-label">Countries</div>
+            </div>
+
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-icon"><i class="fas fa-award"></i></div>
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Industry Awards</div>
+            </div>
+        </div>
+
+        <div class="values-container">
+            <div class="value-item" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="value-title"><i class="fas fa-eye me-2"></i>Clarity</h3>
+                <p class="value-description">
+                    We provide straightforward data and insights without unnecessary complexity, empowering you to make informed decisions.
+                </p>
+            </div>
+
+            <div class="value-item" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="value-title"><i class="fas fa-shield-alt me-2"></i>Security</h3>
+                <p class="value-description">
+                    Your assets and data are protected by state-of-the-art encryption and security protocols, 24/7.
+                </p>
+            </div>
+
+            <div class="value-item" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="value-title"><i class="fas fa-chart-line me-2"></i>Growth</h3>
+                <p class="value-description">
+                    We are committed to helping you achieve consistent portfolio growth through innovative tools and strategies.
+                </p>
             </div>
         </div>
     </div>
 </section>
-<!-- end recent deals -->
 
-<style>
-/* Make all table text white */
-.deals__table th,
-.deals__table td,
-.deals__table tr,
-.deals__table span:not(.badge) {
-    color: #ffffff !important;
-}
-
-/* Make sure profit/loss values remain colored appropriately */
-.deals__table td.green {
-    color: #4caf50 !important; /* Keep profit text green */
-}
-
-.deals__table td.red {
-    color: #f44336 !important; /* Keep loss text red */
-}
-
-/* Ensure badges remain readable */
-.badge.bg-primary, 
-.badge.bg-success {
-    color: #ffffff !important;
-    font-weight: 500;
-}
-
-/* Add some subtle borders to improve readability in dark mode */
-.deals__table th, 
-.deals__table td {
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* Make table headers stand out slightly */
-.deals__table th {
-    font-weight: 600;
-    color: #ffffff !important;
-}
-
-/* Enhanced styling for the trading table */
-.deals {
-    position: relative;
-    background: rgba(20, 22, 42, 0.7);
-    border-radius: 12px;
-    padding: 25px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.deals:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, rgba(76, 175, 80, 0.03), rgba(60, 130, 246, 0.03));
-    z-index: -1;
-}
-
-.deals__table-wrap {
-    overflow-x: auto;
-    border-radius: 8px;
-}
-
-.deals__table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-}
-
-.deals__table thead tr {
-    background: rgba(30, 32, 60, 0.8);
-}
-
-.deals__table th {
-    padding: 15px;
-    text-align: left;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: 2px solid rgba(60, 130, 246, 0.3);
-}
-
-.deals__table td {
-    padding: 15px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.deals__table tbody tr {
-    transition: all 0.3s ease;
-}
-
-.deals__table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateX(5px);
-}
-
-/* New row animation */
-@keyframes newRowHighlight {
-    0% { background-color: rgba(76, 175, 80, 0.3); }
-    100% { background-color: transparent; }
-}
-
-.new-row {
-    animation: newRowHighlight 2s ease-out;
-}
-
-/* Value change animation */
-@keyframes valueChange {
-    0% { color: rgba(76, 175, 80, 1) !important; }
-    100% { color: inherit; }
-}
-
-.value-change {
-    animation: valueChange 2s ease-out;
-}
-
-/* Badge styling */
-.badge {
-    padding: 5px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.badge.bg-primary {
-    background: linear-gradient(135deg, #3c82f6, #1a56db) !important;
-    box-shadow: 0 2px 5px rgba(60, 130, 246, 0.3);
-}
-
-.badge.bg-success {
-    background: linear-gradient(135deg, #4caf50, #2e7d32) !important;
-    box-shadow: 0 2px 5px rgba(76, 175, 80, 0.3);
-}
-
-/* Live indicator */
-.live-indicator {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 5px 12px;
-    background: rgba(20, 22, 42, 0.9);
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 5;
-}
-
-.live-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #f44336;
-    animation: livePulse 1.5s infinite;
-}
-
-.live-text {
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-@keyframes livePulse {
-    0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(244, 67, 54, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
-}
-
-/* Row flickering effect for updates */
-@keyframes rowFlicker {
-    0% { background-color: transparent; }
-    50% { background-color: rgba(60, 130, 246, 0.15); }
-    100% { background-color: transparent; }
-}
-
-/* Responsive adjustments */
-@media (max-width: 992px) {
-    .deals__table th,
-    .deals__table td {
-        padding: 12px 10px;
-    }
-    
-    .deals {
-        padding: 15px;
-    }
-    
-    .live-indicator {
-        top: 15px;
-        right: 15px;
-    }
-}
-
-@media (max-width: 768px) {
-    .deals__table {
-        min-width: 900px; /* Ensure horizontal scrolling on mobile */
-    }
-}
-</style>
-
-<script>
-// Sample trade data
-const tradeData = [
-    {
-        pair: "BTC/USDT",
-        exchange: "Binance",
-        date: "20 Apr 2025",
-        buyPrice: "$83,241.56",
-        sellPrice: "$84,975.32",
-        volume: "2.35 BTC",
-        profit: "+$4,074.39",
-        isProfit: true,
-        spread: "2.08%",
-        isTopTrader: false,
-        isMirrored: false
-    },
-    {
-        pair: "ETH/USDT",
-        exchange: "Kraken",
-        date: "20 Apr 2025",
-        buyPrice: "$4,532.78",
-        sellPrice: "$4,689.45",
-        volume: "28.5 ETH",
-        profit: "+$4,471.06",
-        isProfit: true,
-        spread: "3.46%",
-        isTopTrader: true,
-        isMirrored: false
-    },
-    {
-        pair: "SOL/USDT",
-        exchange: "Coinbase",
-        date: "19 Apr 2025",
-        buyPrice: "$286.43",
-        sellPrice: "$298.75",
-        volume: "354 SOL",
-        profit: "+$4,355.52",
-        isProfit: true,
-        spread: "4.30%",
-        isTopTrader: false,
-        isMirrored: false
-    },
-    {
-        pair: "XRP/USDT",
-        exchange: "Bybit",
-        date: "19 Apr 2025",
-        buyPrice: "$1.35",
-        sellPrice: "$1.32",
-        volume: "15,500 XRP",
-        profit: "-$465.00",
-        isProfit: false,
-        spread: "-2.22%",
-        isTopTrader: false,
-        isMirrored: false
-    },
-    {
-        pair: "DOGE/USDT",
-        exchange: "OKX",
-        date: "18 Apr 2025",
-        buyPrice: "$0.254",
-        sellPrice: "$0.287",
-        volume: "125,000 DOGE",
-        profit: "+$4,125.00",
-        isProfit: true,
-        spread: "12.99%",
-        isTopTrader: true,
-        isMirrored: false
-    },
-    {
-        pair: "ADA/USDT",
-        exchange: "Binance",
-        date: "18 Apr 2025",
-        buyPrice: "$0.978",
-        sellPrice: "$1.051",
-        volume: "18,200 ADA",
-        profit: "+$1,328.60",
-        isProfit: true,
-        spread: "7.46%",
-        isTopTrader: false,
-        isMirrored: false
-    },
-    {
-        pair: "AVAX/USDT",
-        exchange: "KuCoin",
-        date: "17 Apr 2025",
-        buyPrice: "$67.32",
-        sellPrice: "$72.85",
-        volume: "420 AVAX",
-        profit: "+$2,322.60",
-        isProfit: true,
-        spread: "8.21%",
-        isTopTrader: false,
-        isMirrored: true
-    },
-    {
-        pair: "DOT/USDT",
-        exchange: "Binance",
-        date: "17 Apr 2025",
-        buyPrice: "$12.45",
-        sellPrice: "$13.18",
-        volume: "1,250 DOT",
-        profit: "+$912.50",
-        isProfit: true,
-        spread: "5.86%",
-        isTopTrader: false,
-        isMirrored: false
-    },
-    {
-        pair: "LINK/USDT",
-        exchange: "Coinbase",
-        date: "16 Apr 2025",
-        buyPrice: "$18.23",
-        sellPrice: "$19.47",
-        volume: "980 LINK",
-        profit: "+$1,215.20",
-        isProfit: true,
-        spread: "6.80%",
-        isTopTrader: false,
-        isMirrored: true
-    },
-    {
-        pair: "MATIC/USDT",
-        exchange: "Kraken",
-        date: "16 Apr 2025",
-        buyPrice: "$0.875",
-        sellPrice: "$0.854",
-        volume: "12,500 MATIC",
-        profit: "-$262.50",
-        isProfit: false,
-        spread: "-2.40%",
-        isTopTrader: false,
-        isMirrored: false
-    }
-];
-
-// Additional trading pairs for variety
-const additionalPairs = [
-    "BNB/USDT", "SHIB/USDT", "UNI/USDT", "ATOM/USDT", "AAVE/USDT", 
-    "FTM/USDT", "NEAR/USDT", "BCH/USDT", "LTC/USDT", "APE/USDT"
-];
-
-// Exchanges for variety
-const exchanges = ["Binance", "Kraken", "Coinbase", "OKX", "KuCoin", "Bybit", "Bitfinex", "Gemini"];
-
-// Function to generate a random trade
-function generateRandomTrade() {
-    // Get random pair or use additional pair
-    const useAdditionalPair = Math.random() > 0.7;
-    let pair;
-    
-    if (useAdditionalPair) {
-        const randomIndex = Math.floor(Math.random() * additionalPairs.length);
-        pair = additionalPairs[randomIndex];
-    } else {
-        // Extract just the base currency from existing pairs
-        const existingPairs = tradeData.map(trade => trade.pair.split('/')[0]);
-        const randomIndex = Math.floor(Math.random() * existingPairs.length);
-        pair = existingPairs[randomIndex] + "/USDT";
-    }
-    
-    // Random exchange
-    const exchange = exchanges[Math.floor(Math.random() * exchanges.length)];
-    
-    // Generate random price data
-    const isProfit = Math.random() > 0.3; // 70% chance of profit
-    
-    // Base price between $0.01 and $100,000
-    let buyPrice;
-    if (pair.includes("BTC")) {
-        buyPrice = (Math.random() * 30000 + 70000).toFixed(2);
-    } else if (pair.includes("ETH")) {
-        buyPrice = (Math.random() * 2000 + 3000).toFixed(2);
-    } else if (pair.includes("SOL")) {
-        buyPrice = (Math.random() * 100 + 200).toFixed(2);
-    } else if (pair.includes("DOGE") || pair.includes("SHIB")) {
-        buyPrice = (Math.random() * 0.5).toFixed(4);
-    } else {
-        buyPrice = (Math.random() * 200 + 0.5).toFixed(pair.includes("ADA") || pair.includes("XRP") ? 3 : 2);
-    }
-    
-    // Calculate spread between -5% and +15%
-    const spreadPercent = isProfit ? 
-                         (Math.random() * 15 + 1).toFixed(2) : 
-                         (-(Math.random() * 5)).toFixed(2);
-    
-    // Calculate sell price based on spread
-    const sellPrice = (parseFloat(buyPrice) * (1 + parseFloat(spreadPercent) / 100)).toFixed(buyPrice.split('.')[1].length);
-    
-    // Generate volume
-    let volume;
-    if (pair.includes("BTC")) {
-        volume = (Math.random() * 3 + 0.5).toFixed(2);
-    } else if (pair.includes("ETH")) {
-        volume = (Math.random() * 30 + 5).toFixed(1);
-    } else if (pair.includes("DOGE") || pair.includes("SHIB")) {
-        volume = Math.floor(Math.random() * 900000 + 100000).toLocaleString();
-    } else {
-        volume = Math.floor(Math.random() * 9000 + 100).toLocaleString();
-    }
-    
-    // Calculate profit/loss
-    const priceDiff = parseFloat(sellPrice) - parseFloat(buyPrice);
-    const volNumber = parseFloat(volume.replace(/,/g, ''));
-    const profitAmount = priceDiff * volNumber;
-    
-    // Format profit with + or - sign
-    const profit = (profitAmount >= 0 ? "+" : "") + "$" + Math.abs(profitAmount).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    
-    // Random attributes
-    const isTopTrader = Math.random() > 0.85; // 15% chance of being top trader
-    const isMirrored = Math.random() > 0.85; // 15% chance of being mirrored
-    
-    // Generate date (within last 5 days)
-    const today = new Date();
-    const daysAgo = Math.floor(Math.random() * 5);
-    today.setDate(today.getDate() - daysAgo);
-    const date = today.getDate() + " Apr 2025";
-    
-    return {
-        pair: pair,
-        exchange: exchange,
-        date: date,
-        buyPrice: "$" + parseFloat(buyPrice).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 4}),
-        sellPrice: "$" + parseFloat(sellPrice).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 4}),
-        volume: volume + " " + pair.split('/')[0],
-        profit: profit,
-        isProfit: profitAmount >= 0,
-        spread: spreadPercent + "%",
-        isTopTrader: isTopTrader,
-        isMirrored: isMirrored
-    };
-}
-
-// Function to create table row HTML
-function createTableRow(trade) {
-    let pairCell = trade.pair;
-    
-    if (trade.isTopTrader) {
-        pairCell = `<span class="badge bg-primary">Top Trader</span> ${trade.pair}`;
-    } else if (trade.isMirrored) {
-        pairCell = `<span class="badge bg-success">Mirrored</span> ${trade.pair}`;
-    }
-    
-    return `
-        <tr>
-            <td>${pairCell}</td>
-            <td>${trade.exchange}</td>
-            <td>${trade.date}</td>
-            <td>${trade.buyPrice}</td>
-            <td>${trade.sellPrice}</td>
-            <td>${trade.volume}</td>
-            <td class="${trade.isProfit ? 'green' : 'red'}">${trade.profit}</td>
-            <td>${trade.spread}</td>
-        </tr>
-    `;
-}
-
-// Function to initialize the table
-function initializeTradingTable() {
-    const tableBody = document.getElementById('liveTradingTableBody');
-    
-    // Clear the table
-    tableBody.innerHTML = '';
-    
-    // Add rows from sample data (limited to 7 rows)
-    for (let i = 0; i < 7; i++) {
-        tableBody.innerHTML += createTableRow(tradeData[i]);
-    }
-}
-
-// Function to update a random cell in the table
-function updateRandomCell() {
-    const tableBody = document.getElementById('liveTradingTableBody');
-    const rows = tableBody.querySelectorAll('tr');
-    
-    // Select a random row
-    const randomRowIndex = Math.floor(Math.random() * rows.length);
-    const randomRow = rows[randomRowIndex];
-    
-    // Select a random cell (excluding the first one which has the pair name)
-    const cells = randomRow.querySelectorAll('td');
-    const randomCellIndex = Math.floor(Math.random() * (cells.length - 1)) + 1;
-    const randomCell = cells[randomCellIndex];
-    
-    // Store original class
-    const originalClass = randomCell.className;
-    
-    // Apply animation class
-    randomCell.classList.add('value-change');
-    
-    // Update with new data
-    if (randomCellIndex === 3) { // Buy price
-        const newPrice = "$" + (parseFloat(cells[3].textContent.replace(/[^0-9.]/g, '')) * (1 + (Math.random() * 0.02 - 0.01))).toFixed(2);
-        randomCell.textContent = newPrice;
-    } else if (randomCellIndex === 4) { // Sell price
-        const newPrice = "$" + (parseFloat(cells[4].textContent.replace(/[^0-9.]/g, '')) * (1 + (Math.random() * 0.02 - 0.01))).toFixed(2);
-        randomCell.textContent = newPrice;
-    } else if (randomCellIndex === 6) { // Profit
-        const currentProfit = parseFloat(cells[6].textContent.replace(/[^0-9.]/g, ''));
-        const isProfit = cells[6].textContent.includes('+');
-        const newProfit = currentProfit * (1 + (Math.random() * 0.1 - 0.05));
-        
-        // Format new profit
-        const newProfitText = (newProfit >= 0 ? "+" : "-") + "$" + newProfit.toFixed(2);
-        randomCell.textContent = newProfitText;
-        
-        // Update class if profit direction changed
-        if ((newProfit >= 0) !== isProfit) {
-            randomCell.className = newProfit >= 0 ? 'green' : 'red';
-        } else {
-            randomCell.className = originalClass;
-        }
-    } else if (randomCellIndex === 7) { // Spread
-        const currentSpread = parseFloat(cells[7].textContent);
-        const newSpread = (currentSpread + (Math.random() * 0.2 - 0.1)).toFixed(2) + "%";
-        randomCell.textContent = newSpread;
-    }
-    
-    // Remove animation class after animation completes
-    setTimeout(() => {
-        randomCell.classList.remove('value-change');
-    }, 2000);
-}
-
-// Function to add a new row
-function addNewTrade() {
-    const tableBody = document.getElementById('liveTradingTableBody');
-    const rows = tableBody.querySelectorAll('tr');
-    
-    // Generate a new random trade
-    const newTrade = generateRandomTrade();
-    
-    // Create a new row element
-    const newRow = document.createElement('tr');
-    newRow.classList.add('new-row');
-    newRow.innerHTML = createTableRow(newTrade).trim();
-    
-    // Add to the top of the table
-    if (rows.length > 0) {
-        tableBody.insertBefore(newRow, rows[0]);
-    } else {
-        tableBody.appendChild(newRow);
-    }
-    
-    // Remove the last row if we have more than 7
-    if (rows.length >= 7) {
-        tableBody.removeChild(rows[rows.length - 1]);
-    }
-    
-    // Remove animation class after it completes
-    setTimeout(() => {
-        newRow.classList.remove('new-row');
-    }, 2000);
-}
-
-// Initialize the table when the document is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    initializeTradingTable();
-    
-    // Start updating random cells every 2-4 seconds
-    setInterval(() => {
-        updateRandomCell();
-    }, Math.random() * 2000 + 2000);
-    
-    // Add new trades every 8-15 seconds
-    setInterval(() => {
-        addNewTrade();
-    }, Math.random() * 7000 + 8000);
-});
-
-// Add flickering effect to rows occasionally
-setInterval(() => {
-    const tableBody = document.getElementById('liveTradingTableBody');
-    if (!tableBody) return;
-    
-    const rows = tableBody.querySelectorAll('tr');
-    if (rows.length === 0) return;
-    
-    // Select a random row
-    const randomRowIndex = Math.floor(Math.random() * rows.length);
-    const randomRow = rows[randomRowIndex];
-    
-    // Add and remove animation style
-    randomRow.style.animation = 'rowFlicker 0.8s';
-    
-    setTimeout(() => {
-        randomRow.style.animation = '';
-    }, 800);
-}, 5000);
-</script>	
-    </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="testimonials" class="testimonials-section">
-        <div class="container">
+<section id="testimonials" class="testimonials-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="section-tag"><i class="fas fa-quote-left me-2"></i> Client Stories</span>
             <h2 class="section-title">What Our Clients Say</h2>
-            <p class="section-subtitle">Join thousands of satisfied investors who trust Nico with their portfolios</p>
-            
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="testimonial-card" id="testimonialCard">
-                        <p class="testimonial-text" id="testimonialText">
-                            "The instant transfer feature saved me crucial time during volatile market shifts. A truly modern financial platform."
-                        </p>
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop" alt="Client" class="testimonial-author-img" id="testimonialImg">
-                        <h4 class="testimonial-author-name" id="testimonialName">Sara Chen</h4>
-                        <p class="testimonial-author-title" id="testimonialTitle">Startup Founder</p>
-                    </div>
-                    
-                    <div class="testimonial-controls">
-                        <button class="testimonial-arrow" onclick="previousTestimonial()">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <span class="testimonial-dot active" onclick="goToTestimonial(0)"></span>
-                        <span class="testimonial-dot" onclick="goToTestimonial(1)"></span>
-                        <span class="testimonial-dot" onclick="goToTestimonial(2)"></span>
-                        <span class="testimonial-dot" onclick="goToTestimonial(3)"></span>
-                        <button class="testimonial-arrow" onclick="nextTestimonial()">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
+            <p class="text-secondary mx-auto" style="max-width: 600px;">
+                Join thousands of satisfied investors who trust Nico with their portfolios
+            </p>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-card" id="testimonialCard">
+                    <p class="testimonial-text" id="testimonialText">
+                        "The instant transfer feature saved me crucial time during volatile market shifts. A truly modern financial platform."
+                    </p>
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop" 
+                         alt="Client" 
+                         class="testimonial-author-img" 
+                         id="testimonialImg">
+                    <h4 class="testimonial-author-name" id="testimonialName">Sara Chen</h4>
+                    <p class="testimonial-author-title" id="testimonialTitle">Startup Founder</p>
+                </div>
+                
+                <div class="testimonial-controls">
+                    <button class="testimonial-arrow" id="prevTestimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="testimonial-dot active" data-index="0"></span>
+                    <span class="testimonial-dot" data-index="1"></span>
+                    <span class="testimonial-dot" data-index="2"></span>
+                    <span class="testimonial-dot" data-index="3"></span>
+                    <button class="testimonial-arrow" id="nextTestimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="about" class="about-section">
+    
+    <footer class="py-5" style="border-top: 1px solid var(--glass-border); background: #000;">
         <div class="container">
-            <h2 class="section-title">Our Mission: Clarity, Security, Growth</h2>
-            
-            <div class="row justify-content-center mb-5">
-                <div class="col-lg-10">
-                    <p class="mission-text">
-                        At Nico, our mission is simple: to make sophisticated investment accessible to everyone. We believe in clarity—providing straightforward data without unnecessary complexity. Our core values center around absolute security and delivering consistent growth for our clients.
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <a href="#" class="nav-logo mb-4 d-block">Nico</a>
+                    <p class="text-secondary">
+                        The world's most trusted social trading platform. Join millions who have already discovered smarter investing.
                     </p>
-                    <p class="mission-text">
-                        Founded in 2018, Nico has quickly become a leader in fintech innovation, managing over $5 billion in assets and servicing thousands of satisfied clients worldwide. We are committed to technological excellence and ethical practices, ensuring you always have a trustworthy partner on your financial journey.
-                    </p>
-                </div>
-            </div>
-
-            <div class="stats-container">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-users"></i></div>
-                    <div class="stat-number">50K+</div>
-                    <div class="stat-label">Active Users</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
-                    <div class="stat-number">$5B+</div>
-                    <div class="stat-label">Assets Managed</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-globe"></i></div>
-                    <div class="stat-number">120+</div>
-                    <div class="stat-label">Countries</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-award"></i></div>
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">Industry Awards</div>
-                </div>
-            </div>
-
-            <div class="values-container">
-                <div class="value-item">
-                    <h3 class="value-title">Clarity</h3>
-                    <p class="value-description">
-                        We provide straightforward data and insights without unnecessary complexity, empowering you to make informed decisions.
-                    </p>
-                </div>
-
-                <div class="value-item">
-                    <h3 class="value-title">Security</h3>
-                    <p class="value-description">
-                        Your assets and data are protected by state-of-the-art encryption and security protocols, 24/7.
-                    </p>
-                </div>
-
-                <div class="value-item">
-                    <h3 class="value-title">Growth</h3>
-                    <p class="value-description">
-                        We are committed to helping you achieve consistent portfolio growth through innovative tools and strategies.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact" class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h5>
-                        <span style="font-size:1.2rem;">📈</span> Nico
-                    </h5>
-                    <p class="footer-description">
-                        Your trusted investment partner for secure and profitable portfolio management.
-                    </p>
-                    <div class="social-icons">
-                        <a href="check.html" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-secondary hover-text-white"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-secondary hover-text-white"><i class="fab fa-discord fa-lg"></i></a>
+                        <a href="#" class="text-secondary hover-text-white"><i class="fab fa-telegram fa-lg"></i></a>
                     </div>
                 </div>
-
-                <div class="footer-section">
-                    <h5>Quick Links</h5>
-                    <ul class="footer-links">
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#live-trading">Live Trading</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#about">About Us</a></li>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white mb-4">Platform</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="#" class="text-secondary">Markets</a></li>
+                        <li><a href="#" class="text-secondary">Copy Trading</a></li>
+                        <li><a href="#" class="text-secondary">Staking</a></li>
                     </ul>
                 </div>
-
-                <div class="footer-section">
-                    <h5>Legal</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                        <li><a href="#">Disclaimer</a></li>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white mb-4">Support</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="#" class="text-secondary">Help Center</a></li>
+                        <li><a href="#" class="text-secondary">Fees</a></li>
+                        <li><a href="#" class="text-secondary">Security</a></li>
                     </ul>
                 </div>
-
-                <div class="footer-section">
-                    <h5>Contact Us</h5>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-envelope me-2"></i> info@nicoinvest.com</li>
-                        <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-map-marker-alt me-2"></i> New York, USA</li>
-                    </ul>
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p class="text-secondary small">Market insights delivered to your inbox.</p>
+                    <div class="d-flex gap-2">
+                        <input type="email" class="form-control bg-dark border-secondary text-white" placeholder="Email address">
+                        <button class="btn btn-primary-custom">Go</button>
+                    </div>
                 </div>
             </div>
-
-            <div class="footer-bottom">
-                <div class="footer-copyright">
-                    © 2025 <strong>Nico Investment Platform</strong>. All rights reserved.
-                </div>
-                <div class="footer-tagline">
-                    Designed with excellence for your financial success
-                </div>
+            <hr class="border-secondary border-opacity-25 my-5">
+            <div class="text-center text-secondary small">
+                &copy; 2025 Nico Investment Platform. All rights reserved.
             </div>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
-        // === Mobile Sidebar Logic ===
+       // Initialize Animate On Scroll
+AOS.init({
+    once: true,
+    offset: 100,
+    duration: 800,
+    disable: function() {
+        // Disable AOS on mobile for better initial load
+        return window.innerWidth < 768;
+    },
+    startEvent: 'load', // Initialize on page load
+    anchorPlacement: 'top-bottom'
+});
+
+// Force refresh AOS on page load to show elements immediately
+window.addEventListener('load', function() {
+    AOS.refresh();
+});
+
+        // Mobile Menu Logic
         const mobileToggle = document.getElementById('mobileToggle');
         const mobileSidebar = document.getElementById('mobileSidebar');
         const closeSidebar = document.getElementById('closeSidebar');
         const overlay = document.getElementById('overlay');
-        const sidebarLinks = document.querySelectorAll('.sidebar-link');
 
         function toggleMenu() {
             mobileSidebar.classList.toggle('active');
             overlay.classList.toggle('active');
-            document.body.style.overflow = mobileSidebar.classList.contains('active') ? 'hidden' : '';
         }
-
-        mobileToggle.addEventListener('click', toggleMenu);
-        closeSidebar.addEventListener('click', toggleMenu);
-        overlay.addEventListener('click', toggleMenu);
-
-        // Close menu when clicking a link
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', toggleMenu);
-        });
-
-        // === Dynamic Hero Text Animation ===
-        const dynamicTexts = [
-            'Investment Partner',
-            'Financial Advisor',
-            'Wealth Builder',
-            'Trading Platform',
-            'Portfolio Manager'
-        ];
         
-        let currentTextIndex = 0;
-        const dynamicTextElement = document.getElementById('dynamicText');
-        
-        function changeText() {
-            currentTextIndex = (currentTextIndex + 1) % dynamicTexts.length;
-            dynamicTextElement.style.animation = 'none';
+        [mobileToggle, closeSidebar, overlay].forEach(el => el.addEventListener('click', toggleMenu));
+
+        // Dynamic Hero Text
+        const texts = ['Crypto', 'Forex', 'Stocks', 'Futures'];
+        let count = 0;
+        setInterval(() => {
+            count = (count + 1) % texts.length;
+            const el = document.getElementById('dynamicText');
+            el.style.opacity = 0;
             setTimeout(() => {
-                dynamicTextElement.textContent = dynamicTexts[currentTextIndex];
-                dynamicTextElement.style.animation = 'fadeInOut 1s ease-in-out';
-            }, 50);
-        }
-        
-        setInterval(changeText, 5000);
+                el.innerText = texts[count];
+                el.style.opacity = 1;
+            }, 200);
+        }, 3000);
 
-        // === Testimonials Logic ===
-        const testimonials = [
-            {
-                text: "The instant transfer feature saved me crucial time during volatile market shifts. A truly modern financial platform.",
-                name: "Sara Chen",
-                title: "Startup Founder",
-                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop"
-            },
-            {
-                text: "Nico's AI-powered insights have consistently helped me make smarter investment decisions. The returns speak for themselves.",
-                name: "Michael Rodriguez",
-                title: "Portfolio Manager",
-                image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop"
-            },
-            {
-                text: "The security features give me peace of mind. I can trade confidently knowing my assets are protected 24/7.",
-                name: "Emily Watson",
-                title: "Real Estate Investor",
-                image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop"
-            },
-            {
-                text: "Best investment platform I've used. The mobile app is seamless and the customer support is outstanding.",
-                name: "David Park",
-                title: "Tech Entrepreneur",
-                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop"
+        // --- ENHANCED LIVE TRADING SCRIPT ---
+        const tableBody = document.getElementById('liveTradingTableBody');
+        const pairs = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT', 'XRP/USDT', 'BNB/USDT'];
+        
+        function getRandomTrade() {
+            const pair = pairs[Math.floor(Math.random() * pairs.length)];
+            const type = Math.random() > 0.5 ? 'Buy' : 'Sell';
+            const priceBase = pair.includes('BTC') ? 64000 : pair.includes('ETH') ? 3400 : 120;
+            const price = (priceBase + (Math.random() * 50 - 25)).toFixed(2);
+            const amount = (Math.random() * 2).toFixed(4);
+            const total = (price * amount).toFixed(2);
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+            
+            return { pair, type, price, amount, total, time };
+        }
+
+        function renderRow(trade) {
+            const colorClass = trade.type === 'Buy' ? 'text-success' : 'text-danger';
+            // Visual depth bar width
+            const depthWidth = Math.floor(Math.random() * 60) + 10; 
+            const depthClass = trade.type === 'Buy' ? '' : 'sell';
+
+            return `
+                <tr class="fade-in-row">
+                    <td><span class="fw-bold text-white">${trade.pair}</span></td>
+                    <td class="text-secondary">${trade.time}</td>
+                    <td class="${colorClass}">${trade.price}</td>
+                    <td>${trade.amount}</td>
+                    <td class="text-end text-white position-relative">
+                        <span class="position-relative z-1">${trade.total}</span>
+                        <div class="depth-bar ${depthClass}" style="width: ${depthWidth}%"></div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        function initTable() {
+            // Fill initial rows
+            for(let i=0; i<7; i++) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = renderRow(getRandomTrade());
+                tableBody.appendChild(tr);
             }
+        }
+
+        function updateTable() {
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = renderRow(getRandomTrade());
+            
+            // Add new row to top with animation
+            tableBody.insertBefore(newRow, tableBody.firstChild);
+            
+            // Remove last row to keep list short
+            if(tableBody.children.length > 8) {
+                tableBody.removeChild(tableBody.lastChild);
+            }
+        }
+
+        initTable();
+        setInterval(updateTable, 1500); // Add new trade every 1.5s
+
+        // ==========================================
+// TESTIMONIALS FUNCTIONALITY
+// ==========================================
+const testimonials = [
+    {
+        text: "The instant transfer feature saved me crucial time during volatile market shifts. A truly modern financial platform.",
+        name: "Sara Chen",
+        title: "Startup Founder",
+        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop"
+    },
+    {
+        text: "Nico's AI-powered insights have consistently helped me make smarter investment decisions. The returns speak for themselves.",
+        name: "Michael Rodriguez",
+        title: "Portfolio Manager",
+        image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop"
+    },
+    {
+        text: "The security features give me peace of mind. I can trade confidently knowing my assets are protected 24/7.",
+        name: "Emily Watson",
+        title: "Real Estate Investor",
+        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop"
+    },
+    {
+        text: "Best investment platform I've used. The mobile app is seamless and the customer support is outstanding.",
+        name: "David Park",
+        title: "Tech Entrepreneur",
+        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop"
+    }
+];
+
+let currentTestimonialIndex = 0;
+
+function updateTestimonial(index) {
+    const testimonial = testimonials[index];
+    const textEl = document.getElementById('testimonialText');
+    const nameEl = document.getElementById('testimonialName');
+    const titleEl = document.getElementById('testimonialTitle');
+    const imgEl = document.getElementById('testimonialImg');
+    
+    // Fade out
+    textEl.style.opacity = 0;
+    nameEl.style.opacity = 0;
+    titleEl.style.opacity = 0;
+    imgEl.style.opacity = 0;
+    
+    setTimeout(() => {
+        // Update content
+        textEl.textContent = testimonial.text;
+        nameEl.textContent = testimonial.name;
+        titleEl.textContent = testimonial.title;
+        imgEl.src = testimonial.image;
+        
+        // Update dots
+        document.querySelectorAll('.testimonial-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+        
+        // Fade in
+        setTimeout(() => {
+            textEl.style.opacity = 1;
+            nameEl.style.opacity = 1;
+            titleEl.style.opacity = 1;
+            imgEl.style.opacity = 1;
+        }, 50);
+    }, 300);
+}
+
+function nextTestimonial() {
+    currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
+    updateTestimonial(currentTestimonialIndex);
+}
+
+function previousTestimonial() {
+    currentTestimonialIndex = (currentTestimonialIndex - 1 + testimonials.length) % testimonials.length;
+    updateTestimonial(currentTestimonialIndex);
+}
+
+function goToTestimonial(index) {
+    currentTestimonialIndex = index;
+    updateTestimonial(currentTestimonialIndex);
+}
+
+// Event Listeners
+document.getElementById('nextTestimonial')?.addEventListener('click', nextTestimonial);
+document.getElementById('prevTestimonial')?.addEventListener('click', previousTestimonial);
+
+document.querySelectorAll('.testimonial-dot').forEach((dot, index) => {
+    dot.addEventListener('click', () => goToTestimonial(index));
+});
+
+// Auto-rotate testimonials
+setInterval(nextTestimonial, 7000);
+
+// Add transition styles
+const testimonialText = document.getElementById('testimonialText');
+const testimonialName = document.getElementById('testimonialName');
+const testimonialTitle = document.getElementById('testimonialTitle');
+const testimonialImg = document.getElementById('testimonialImg');
+
+if (testimonialText) {
+    testimonialText.style.transition = 'opacity 0.3s ease';
+    testimonialName.style.transition = 'opacity 0.3s ease';
+    testimonialTitle.style.transition = 'opacity 0.3s ease';
+    testimonialImg.style.transition = 'opacity 0.3s ease';
+}
+
+
+// ==========================================
+// PREMIUM TRADING ROOM - CONFLICT-FREE VERSION
+// ==========================================
+
+(function() {
+    'use strict';
+    
+    // ==========================================
+    // LIVE MARKET DATA TABLE
+    // ==========================================
+    const premiumTableBody = document.getElementById('liveTradingTableBody');
+    
+    if (premiumTableBody) {
+        const tradingPairs = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT', 'XRP/USDT', 'BNB/USDT'];
+        
+        function getPremiumTrade() {
+            const pair = tradingPairs[Math.floor(Math.random() * tradingPairs.length)];
+            const type = Math.random() > 0.5 ? 'Buy' : 'Sell';
+            const priceBase = pair.includes('BTC') ? 64000 : pair.includes('ETH') ? 3400 : 120;
+            const price = (priceBase + (Math.random() * 50 - 25)).toFixed(2);
+            const amount = (Math.random() * 2).toFixed(4);
+            const total = (price * amount).toFixed(2);
+            
+            return { pair, type, price, amount, total };
+        }
+
+        function renderPremiumRow(trade) {
+            const colorClass = trade.type === 'Buy' ? 'text-success' : 'text-danger';
+            const depthWidth = Math.floor(Math.random() * 60) + 10; 
+            const depthClass = trade.type === 'Buy' ? '' : 'sell';
+
+            return `
+                <tr class="fade-in-row">
+                    <td><span class="fw-bold text-white">${trade.pair}</span></td>
+                    <td class="${colorClass}">${trade.price}</td>
+                    <td class="text-end text-white position-relative">
+                        <span class="position-relative z-1">${trade.total}</span>
+                        <div class="depth-bar ${depthClass}" style="width: ${depthWidth}%"></div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        function initPremiumTable() {
+            for(let i=0; i<5; i++) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = renderPremiumRow(getPremiumTrade());
+                premiumTableBody.appendChild(tr);
+            }
+        }
+
+        function updatePremiumTable() {
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = renderPremiumRow(getPremiumTrade());
+            premiumTableBody.insertBefore(newRow, premiumTableBody.firstChild);
+            if(premiumTableBody.children.length > 6) {
+                premiumTableBody.removeChild(premiumTableBody.lastChild);
+            }
+        }
+
+        initPremiumTable();
+        setInterval(updatePremiumTable, 2000);
+    }
+
+    // ==========================================
+    // TRADING ROOM FUNCTIONALITY
+    // ==========================================
+    
+    const tradersListEl = document.getElementById('activeTradersList');
+    
+    if (tradersListEl) {
+        const traderProfiles = [
+            { name: 'Nathan Fox', title: 'Crypto Specialist', badge: 'PRO' },
+            { name: 'AKSHOY', title: 'Day Trader', badge: 'ELITE' },
+            { name: 'FW. ARYAN', title: 'Swing Trader', badge: 'PRO' },
+            { name: 'Lokesh Alamchandani', title: 'Scalper', badge: 'MASTER' },
+            { name: 'Syed Azeem FW', title: 'Options Trader', badge: 'PRO' },
+            { name: 'MEERA JOSHI', title: 'Forex Expert', badge: 'ELITE' },
+            { name: 'Sarah Chen', title: 'AI Trader', badge: 'PRO' },
+            { name: 'Marcus Kane', title: 'Crypto Whale', badge: 'ELITE' },
+            { name: 'Priya Sharma', title: 'Algo Trader', badge: 'MASTER' },
+            { name: 'James Wilson', title: 'Risk Manager', badge: 'PRO' }
         ];
 
-        let currentTestimonialIndex = 0;
+        const traderAvatars = [
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop',
+            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop',
+            'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop',
+            'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop',
+            'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop',
+            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop',
+            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop',
+            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+            'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=100&h=100&fit=crop'
+        ];
 
-        function updateTestimonial(index) {
-            const testimonial = testimonials[index];
-            const tText = document.getElementById('testimonialText');
+        const tradeStatuses = ['buying', 'selling', 'analyzing'];
+        const statusDisplayLabels = {
+            'buying': 'Buying',
+            'selling': 'Selling',
+            'analyzing': 'Analyzing'
+        };
+
+        let roomTraders = [];
+
+        function generateTrader() {
+            const profile = traderProfiles[Math.floor(Math.random() * traderProfiles.length)];
+            const avatar = traderAvatars[Math.floor(Math.random() * traderAvatars.length)];
+            const status = tradeStatuses[Math.floor(Math.random() * tradeStatuses.length)];
+            const profit = (Math.random() * 10 - 2).toFixed(2);
+            const isTrading = Math.random() > 0.5;
             
-            // Simple fade out
-            tText.style.opacity = 0;
+            return {
+                ...profile,
+                avatar,
+                status,
+                profit,
+                isTrading,
+                id: Date.now() + Math.random()
+            };
+        }
+
+        function renderTraderCard(trader) {
+            const profitColor = trader.profit >= 0 ? 'text-success' : 'text-danger';
+            const profitSign = trader.profit >= 0 ? '+' : '';
+            const statusClass = trader.status;
             
-            setTimeout(() => {
-                tText.textContent = testimonial.text;
-                document.getElementById('testimonialName').textContent = testimonial.name;
-                document.getElementById('testimonialTitle').textContent = testimonial.title;
-                document.getElementById('testimonialImg').src = testimonial.image;
-                
-                // Update dots
-                document.querySelectorAll('.testimonial-dot').forEach((dot, i) => {
-                    dot.classList.toggle('active', i === index);
-                });
-                
-                // Fade in
-                tText.style.opacity = 1;
-            }, 300);
+            return `
+                <div class="trader-item">
+                    <div class="trader-info">
+                        <div style="position: relative;">
+                            <img src="${trader.avatar}" alt="${trader.name}" class="trader-avatar">
+                            <span class="trader-status ${trader.isTrading ? 'trading' : ''}"></span>
+                        </div>
+                        <div class="trader-details">
+                            <h5>
+                                ${trader.name}
+                                <span class="trader-badge">${trader.badge}</span>
+                            </h5>
+                            <p>${trader.title}</p>
+                        </div>
+                    </div>
+                    <div class="trader-actions">
+                        <span class="trade-status ${statusClass}">
+                            ${statusDisplayLabels[trader.status]}
+                        </span>
+                        <span class="profit-indicator ${profitColor}">
+                            ${profitSign}${trader.profit}%
+                        </span>
+                        <i class="fas fa-microphone-slash muted-icon"></i>
+                    </div>
+                </div>
+            `;
         }
 
-        function nextTestimonial() {
-            currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
-            updateTestimonial(currentTestimonialIndex);
+        function setupTradingRoom() {
+            // Initialize with 6 traders
+            for(let i = 0; i < 6; i++) {
+                roomTraders.push(generateTrader());
+            }
+            refreshTradersList();
         }
 
-        function previousTestimonial() {
-            currentTestimonialIndex = (currentTestimonialIndex - 1 + testimonials.length) % testimonials.length;
-            updateTestimonial(currentTestimonialIndex);
+        function refreshTradersList() {
+            tradersListEl.innerHTML = roomTraders.map(trader => renderTraderCard(trader)).join('');
         }
 
-        function goToTestimonial(index) {
-            currentTestimonialIndex = index;
-            updateTestimonial(currentTestimonialIndex);
+        function addNewRoomTrader() {
+            // Remove oldest trader if we have more than 8
+            if(roomTraders.length >= 8) {
+                roomTraders.pop();
+            }
+            // Add new trader at the beginning
+            roomTraders.unshift(generateTrader());
+            refreshTradersList();
         }
 
-        setInterval(nextTestimonial, 7000);
+        function refreshTraderCount() {
+            const count = 420 + Math.floor(Math.random() * 15);
+            const countEl1 = document.getElementById('activeTraderCount');
+            const countEl2 = document.getElementById('liveCountDisplay');
+            
+            if (countEl1) countEl1.textContent = count;
+            if (countEl2) countEl2.textContent = count;
+        }
 
+        // Initialize trading room
+        setupTradingRoom();
+
+        // Add new trader every 5-8 seconds
+        setInterval(addNewRoomTrader, 5000 + Math.random() * 3000);
+
+        // Update trader count every 10 seconds
+        setInterval(refreshTraderCount, 10000);
+
+        // Update existing traders' statuses periodically
+        setInterval(() => {
+            roomTraders = roomTraders.map(trader => ({
+                ...trader,
+                status: tradeStatuses[Math.floor(Math.random() * tradeStatuses.length)],
+                profit: (parseFloat(trader.profit) + (Math.random() * 2 - 1)).toFixed(2),
+                isTrading: Math.random() > 0.3
+            }));
+            refreshTradersList();
+        }, 8000);
+    }
+})();
 
     </script>
 </body>
