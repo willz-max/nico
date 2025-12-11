@@ -1640,7 +1640,7 @@
                                     <tr>
                                         <th>Pair</th>
                                         <th>Price</th>
-                                        <th class="text-end">Volume</th>
+                                        <th class="text-end">Volumes</th>
                                     </tr>
                                 </thead>
                                 <tbody id="liveTradingTableBody" class="tech-font">
@@ -1855,12 +1855,23 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        // Initialize Animate On Scroll
-        AOS.init({
-            once: true,
-            offset: 100,
-            duration: 800,
-        });
+       // Initialize Animate On Scroll
+AOS.init({
+    once: true,
+    offset: 100,
+    duration: 800,
+    disable: function() {
+        // Disable AOS on mobile for better initial load
+        return window.innerWidth < 768;
+    },
+    startEvent: 'load', // Initialize on page load
+    anchorPlacement: 'top-bottom'
+});
+
+// Force refresh AOS on page load to show elements immediately
+window.addEventListener('load', function() {
+    AOS.refresh();
+});
 
         // Mobile Menu Logic
         const mobileToggle = document.getElementById('mobileToggle');
