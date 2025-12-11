@@ -1178,18 +1178,30 @@
     pointer-events: auto;
 }
 
-/* Override AOS initial state for critical elements */
+/* Override AOS initial state for critical elements on initial load only */
 .hero-content [data-aos],
 .custom-nav[data-aos] {
     opacity: 1 !important;
     transform: none !important;
 }
 
+/* Keep animations smooth on mobile */
 @media (max-width: 767px) {
-    /* Disable AOS animations on mobile */
     [data-aos] {
-        opacity: 1 !important;
-        transform: none !important;
+        transition-duration: 0.4s !important;
+    }
+    
+    /* Reduce animation offset on mobile for better visibility */
+    [data-aos="fade-up"] {
+        transform: translate3d(0, 20px, 0) !important;
+    }
+    
+    [data-aos="fade-right"] {
+        transform: translate3d(-20px, 0, 0) !important;
+    }
+    
+    [data-aos="fade-left"] {
+        transform: translate3d(20px, 0, 0) !important;
     }
 }
         
@@ -1875,22 +1887,22 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-       // Initialize Animate On Scroll
+ // Initialize Animate On Scroll
 AOS.init({
     once: true,
-    offset: 100,
-    duration: 800,
-    disable: function() {
-        // Disable AOS on mobile for better initial load
-        return window.innerWidth < 768;
-    },
-    startEvent: 'load', // Initialize on page load
-    anchorPlacement: 'top-bottom'
+    offset: 50,
+    duration: 600,
+    startEvent: 'DOMContentLoaded',
+    anchorPlacement: 'top-bottom',
+    easing: 'ease-in-out',
+    // Remove the disable function to allow animations on all devices
 });
 
-// Force refresh AOS on page load to show elements immediately
+// Force refresh AOS after page is fully loaded
 window.addEventListener('load', function() {
-    AOS.refresh();
+    setTimeout(function() {
+        AOS.refresh();
+    }, 100);
 });
 
         // Mobile Menu Logic
