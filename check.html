@@ -501,7 +501,8 @@
     background: linear-gradient(135deg, var(--yellow-hover), var(--primary-yellow));
     transform: translateY(-2px);
     box-shadow: 0 15px 40px rgba(240, 185, 11, 0.4);
-    color: var(--dark-bg);
+    /* color: var(--dark-bg); */
+    
 }
 
 /* Floating shapes for visual enhancement */
@@ -1340,6 +1341,111 @@
     }
 }
 
+
+/* ==========================================
+   PARTNERS SECTION
+   ========================================== */
+.partners-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.partner-logo-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 40px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition);
+    min-height: 120px;
+}
+
+.partner-logo-card img {
+    max-width: 80%;
+    max-height: 70px;
+    object-fit: contain;
+    filter: grayscale(100%) brightness(0.8);
+    transition: var(--transition);
+    position: relative;
+    z-index: 2;
+}
+
+.partner-logo-card::before {
+    content: attr(data-name);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(240, 185, 11, 0.9), rgba(252, 213, 53, 0.9));
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 1;
+}
+
+.partner-logo-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-yellow);
+    box-shadow: 0 15px 40px rgba(240, 185, 11, 0.2);
+}
+
+.partner-logo-card:hover::before {
+    opacity: 1;
+}
+
+.partner-logo-card:hover img {
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .partners-section {
+        padding: 80px 0;
+    }
+    
+    .partners-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .partners-section {
+        padding: 60px 0;
+    }
+    
+    .partners-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .partner-logo-card {
+        padding: 30px 20px;
+        min-height: 100px;
+    }
+}
+
 /* ==========================================
    FOOTER RESPONSIVE FIXES
    ========================================== */
@@ -1677,7 +1783,7 @@ footer a:hover {
                     <button class="product-cta-button">Start Staking</button>
                 </div>
                 <div class="col-lg-6 col-md-12 product-feature-image" data-aos="fade-right">
-                    <img src="assets/image/op-staking.jpg" alt="Cryptocurrency Staking" />
+                    <img src="assets/image/new-stacking.jpg" alt="Cryptocurrency Staking" />
                 </div>
             </div>
 
@@ -2040,6 +2146,70 @@ footer a:hover {
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Partners Section -->
+<section class="partners-section" style="background: var(--dark-bg); padding: 120px 0;">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="section-tag"><i class="fas fa-handshake me-2"></i> Trusted Partners</span>
+            <h2 class="section-title">Powered By Industry Leaders</h2>
+            <p class="text-secondary mx-auto" style="max-width: 700px;">
+                We partner with the most trusted names in finance and technology to deliver a secure and reliable trading experience.
+            </p>
+        </div>
+
+        <div class="partners-grid" data-aos="fade-up" data-aos-delay="200">
+            <!-- FXCM -->
+            <div class="partner-logo-card" data-name="FXCM">
+                <img src="assets/image/fxcm.png" alt="FXCM Logo">
+            </div>
+            
+            <!-- XOH Hub -->
+            <div class="partner-logo-card" data-name="XOHub">
+                <img src="assets/image/xoh.png" alt="XOHub Logo">
+            </div>
+            
+            <!-- IXO Prime -->
+            <div class="partner-logo-card" data-name="IXO PRIME">
+                <img src="assets/image/ixq.png" alt="IXO PRIME Logo">
+            </div>
+            
+            <!-- Finalto -->
+            <div class="partner-logo-card" data-name="Finalto">
+                <img src="assets/image/finalto.png" alt="Finalto Logo">
+            </div>
+            
+            <!-- B2Prime -->
+            <div class="partner-logo-card" data-name="B2Prime">
+                <img src="assets/image/b2prime.png" alt="B2Prime Logo">
+            </div>
+            
+            <!-- Swissquote Bank -->
+            <div class="partner-logo-card" data-name="Swissquote Bank">
+                <img src="assets/image/swissquote.png" alt="Swissquote Bank Logo">
+            </div>
+            
+            <!-- XTB -->
+            <div class="partner-logo-card" data-name="XTB">
+                <img src="assets/image/xtb-logo.png" alt="XTB Logo">
+            </div>
+            
+            <!-- Crefisa -->
+            <div class="partner-logo-card" data-name="Crefisa">
+                <img src="assets/image/crefisa.png" alt="Crefisa Logo">
+            </div>
+        </div>
+
+        <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="300">
+            <p class="text-secondary">
+                Want to become a partner? 
+                <a href="#" style="color: var(--primary-yellow); text-decoration: none; font-weight: 600;">
+                    Contact our partnership team <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </p>
         </div>
     </div>
 </section>
